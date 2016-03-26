@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="arm-none-eabi-gcc 4.8.1 mingw32 -mcpu=cortex-m4 -mthumb -Wall -ffunction-sections -g -O0 -c -DSTM32F407VG -DSTM32F4XX -DUSE_STDPERIPH_DRIVER -D__ASSEMBLY__ -I..\..\..\..\..\Users\Janis\Dropbox\Programmieren\C\stm\uhrDesSandes\cmsis_lib -I..\..\..\..\..\Users\Janis\Dropbox\Programmieren\C\stm\uhrDesSandes\cmsis_boot\cmsis -I..\..\..\..\..\Users\Janis\Dropbox\Programmieren\C\stm\uhrDesSandes\ub_lib -I..\..\..\..\..\Users\Janis\Dropbox\Programmieren\C\stm -I..\..\..\..\..\Users\Janis\Dropbox\Programmieren\C\stm\uhrDesSandes\cmsis_lib\include -I..\..\..\..\..\Users\Janis\Dropbox\Programmieren\C\stm\uhrDesSandes\cmsis_boot -I..\..\..\..\..\Users\Janis\Dropbox\Programmieren\C\stm\uhrDesSandes">
+      <target file="syscalls.o" lastModified="153b2c4467d">
+         <source file="..\..\..\syscalls\syscalls.c" lastModified="15370f15006"/>
+      </target>
+      <target file="stm32f4xx_gpio.o" lastModified="153b2c44055">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_gpio.c" lastModified="15370f1a2d3"/>
+      </target>
+      <target file="stm32f4xx_dma.o" lastModified="153b2c44792">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_dma.c" lastModified="153b29b7244"/>
+      </target>
+      <target file="stm32_ub_ws2812_8ch.o" lastModified="153b2c43b68">
+         <source file="..\..\..\ub_lib\stm32_ub_ws2812_8ch.c" lastModified="153b28bb3fb"/>
+      </target>
+      <target file="stm32f4xx_tim.o" lastModified="153b2c44e01">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_tim.c" lastModified="15370f2af64"/>
+      </target>
+      <target file="system_stm32f4xx.o" lastModified="153b2c4416a">
+         <source file="..\..\..\cmsis_boot\system_stm32f4xx.c" lastModified="153b28b95c1"/>
+      </target>
+      <target file="stm32f4xx_rtc.o" lastModified="153b2c44b55">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_rtc.c" lastModified="15370f3a6a9"/>
+      </target>
+      <target file="startup_stm32f4xx.o" lastModified="153b2c42f6f">
+         <source file="..\..\..\cmsis_boot\startup\startup_stm32f4xx.c" lastModified="15370f1a2f3"/>
+      </target>
+      <target file="stm32f4xx_exti.o" lastModified="153b2c44930">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_exti.c" lastModified="15370f25282"/>
+      </target>
+      <target file="stm32f4xx_syscfg.o" lastModified="153b2c42d1e">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_syscfg.c" lastModified="153b29c5728"/>
+      </target>
+      <target file="main.o" lastModified="153b2c43dab">
+         <source file="..\..\..\main.c" lastModified="153b2c40ce3"/>
+      </target>
+      <target file="ub_font_terminal_6x8.o" lastModified="153b2c4485c">
+         <source file="..\..\..\ub_lib\ub_font_terminal_6x8.c" lastModified="15374a4407f"/>
+      </target>
+      <target file="stm32f4xx_rcc.o" lastModified="153b2c43f01">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_rcc.c" lastModified="15370f1a3a4"/>
+      </target>
+      <target file="misc.o" lastModified="153b2c449f4">
+         <source file="..\..\..\cmsis_lib\source\misc.c" lastModified="15370f2873e"/>
+      </target>
+   </processor>
+</history>
