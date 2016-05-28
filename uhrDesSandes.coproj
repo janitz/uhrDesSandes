@@ -4,10 +4,11 @@
     <Device manufacturerId="9" manufacturerName="ST" chipId="344" chipName="STM32F407VG" boardId="" boardName=""/>
     <BuildOption>
       <Compile>
-        <Option name="OptimizationLevel" value="0"/>
+        <Option name="OptimizationLevel" value="2"/>
         <Option name="UseFPU" value="0"/>
         <Option name="UserEditCompiler" value=""/>
         <Option name="SupportCPlusplus" value="0"/>
+        <Option name="FPU" value="2"/>
         <Includepaths>
           <Includepath path="."/>
         </Includepaths>
@@ -16,6 +17,7 @@
           <Define name="STM32F4XX"/>
           <Define name="USE_STDPERIPH_DRIVER"/>
           <Define name="__ASSEMBLY__"/>
+          <Define name="__FPU_USED"/>
         </DefinedSymbols>
       </Compile>
       <Link useDefault="0">
@@ -104,9 +106,9 @@
     <File name="sand.h" path="sand.h" type="1"/>
     <File name="cmsis_lib/source/misc.c" path="cmsis_lib/source/misc.c" type="1"/>
     <File name="cmsis_lib/include/stm32f4xx_tim.h" path="cmsis_lib/include/stm32f4xx_tim.h" type="1"/>
-    <File name="cmsis_boot/cmsis/core_cm4.h" path="cmsis_boot/cmsis/core_cm4.h" type="1"/>
-    <File name="cmsis_lib" path="" type="2"/>
     <File name="syscalls/syscalls.c" path="syscalls/syscalls.c" type="1"/>
+    <File name="cmsis_lib" path="" type="2"/>
+    <File name="cmsis_boot/cmsis/core_cm4.h" path="cmsis_boot/cmsis/core_cm4.h" type="1"/>
     <File name="init.c" path="init.c" type="1"/>
     <File name="ws2812.h" path="ws2812.h" type="1"/>
     <File name="cmsis_lib/source" path="" type="2"/>

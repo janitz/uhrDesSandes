@@ -7,8 +7,6 @@
 
 volatile int32_t calcMatrix[16 * MULTIPLY][8 * MULTIPLY];
 
-uint32_t anim_count;
-
 void InitGpioD();
 void InitTimer();
 void EnableTimerInterrupt();

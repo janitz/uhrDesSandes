@@ -3,10 +3,11 @@
 
 #include <stdint.h>
 #include "globalVars.h"
+#include "ws2812.h"
 
-void gravity(int32_t angle);
-int32_t absolut(int32_t in);
-int32_t probability(int32_t gravity_angle, int32_t neighbor_angle);
-int32_t pseudoCos(int32_t dir);
+//public functions
+void gravity(int32_t angle, int32_t randomDir);
+void sandFlow(int32_t angle, float ratio);
+void sandToWS2812(int32_t filterBits);
 
 #endif

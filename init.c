@@ -17,7 +17,7 @@ void InitTimer()
 {
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
 	TIM_TimeBaseInitTypeDef timerInitStructure;
-	timerInitStructure.TIM_Prescaler = 10000;
+	timerInitStructure.TIM_Prescaler = 4000;
 	timerInitStructure.TIM_CounterMode = TIM_CounterMode_Up;
 	timerInitStructure.TIM_Period = 400;
 	timerInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
@@ -39,31 +39,18 @@ void EnableTimerInterrupt()
 
 void initMatrix()
 {
-	anim_count = 0;
-
 	int32_t y = 0;
 	int32_t x = 0;
 	int32_t y2 = 0;
 	int32_t x2 = 0;
 	int32_t maskVal = -1;
 
-	int32_t count = 0;
 	for (y = 0; y < 16 * MULTIPLY; ++y)
 	{
 		for (x = 0; x < 8 * MULTIPLY; ++x)
 		{
 
 			calcMatrix[y][x] = 0;
-
-			count++;
-			if (count < 32 * MULTIPLY * MULTIPLY)
-			{
-				calcMatrix[y][x] = 1;
-			}
-			else if (count > (16 * 8 * MULTIPLY * MULTIPLY) - (32 * MULTIPLY * MULTIPLY))
-			{
-				calcMatrix[y][x] = 1;
-			}
 		}
 	}
 
@@ -87,4 +74,18 @@ void initMatrix()
 			}
 		}
 	}
+
+	int32_t count = 0;
+	for (y = 0; y < 8 * MULTIPLY; ++y)
+	{
+		for (x = 0; x < 8 * MULTIPLY; ++x)
+		{
+			if (calcMatrix[y][x] == 0 && count < 23 * MULTIPLY * MULTIPLY)
+			{
+				count++;
+				calcMatrix[y][x] = 1;
+			}
+		}
+	}
+
 }

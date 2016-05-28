@@ -8,9 +8,9 @@ uint16_t WS2812_TIMER_BUF[WS2812_TIMER_BUF_LEN];
 //private function
 void p_ws2812_init_io();
 void p_ws2812_init_timer();
-void p_ws2812_clear_buf();
 void p_ws2812_init_NVIC();
 void p_ws2812_init_DMA();
+void p_ws2812_clear_buf();
 void p_ws2812_DMA_start();
 void p_ws2812_calc_timer_buf();
 

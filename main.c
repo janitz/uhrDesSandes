@@ -6,27 +6,24 @@
  * IDE        : CooCox CoIDE 1.7.7
  */
 
-// the libraries are from http://mikrocontroller.bplaced.net/wordpress/?page_id=744
-
-
-
-
+// note:
+// D12-D15 are the std LEDS on the discovery board
 
 #include <stdint.h>
 #include <stm32f4xx_conf.h>
 
+#include "globalVars.h"
 #include "init.h"
 #include "ws2812.h"
-#include "globalVars.h"
 #include "sand.h"
 
 rgb24_t sandCol;
 
-
-//D12-D15 std LEDS
-
-
-void calcMatrixToDmaBuffer();
+int32_t angle = 0;
+int32_t state = 0;
+float ratio = 1;
+int32_t filter = 2;
+int32_t anim_count = 0;
 
 int main(void)
 {
@@ -94,71 +91,76 @@ void TIM2_IRQHandler()
         if ((anim_count / 8) > (16 * MULTIPLY) + (8 * MULTIPLY)) anim_count = 0;
 #endif
 
-        anim_count++;
+        switch (state) {
+			case 0:
+				ratio -= 0.002;
+				filter++;
+				if (filter > 24){filter = 24;}
+				if (ratio < 0)
+				{
+					ratio = 0;
+					state = 1;
+					anim_count = 0;
+				}
+				break;
+			case 1:
+				if (anim_count < 50)
+				{
+					anim_count ++;
+					break;
+				}
+				angle += 2;
+				filter--;
+				if (filter < 2){filter = 2;}
+				if (angle > 180)
+				{
+					angle = 180;
+					state = 2;
+					anim_count = 0;
+				}
+				break;
+			case 2:
+				ratio += 0.002;
+				filter++;
+				if (filter > 24){filter = 24;}
+				if (ratio > 1)
+				{
+					ratio = 1;
+					state = 3;
+					anim_count = 0;
+				}
+				break;
+			case 3:
+				if (anim_count < 50)
+				{
+					anim_count ++;
+					break;
+				}
+				angle += 2;
+				filter--;
+				if (filter < 2){filter = 2;}
+				if (angle > 360)
+				{
+					angle = 0;
+					state = 0;
+					anim_count = 0;
+				}
+				break;
+			default:
+				angle = 0;
+				state = 0;
+				ratio = 1;
+				anim_count = 0;
+				filter = 2;
+				break;
+		}
 
-        gravity(anim_count*5);
-        calcMatrixToDmaBuffer();
+        gravity(angle, -1);
+        sandFlow(angle, ratio);
+        gravity(angle, 0);
+		sandToWS2812(filter / 2);
         ws2812_refresh();
     }
 }
 
 
-void calcMatrixToDmaBuffer()
-{
-	rgb24_t outCol;
-	int32_t i, j, x, y;
-	uint32_t r, g, b;
-
-	int32_t reversed; //bool
-	int32_t ledNr;
-
-	//rows of the led matix
-	for (y = 0; y < 16; ++y)
-	{
-		//the led matrix is a serpentine, so every second line is reversed
-		reversed = y % 2;
-
-		//columns  of the led matix
-		for (x = 0; x < 8; ++x)
-		{
-			r = 0;
-			g = 0;
-			b = 0;
-
-			//each led pixel has a MULTIPLY by MULTIPLY field
-			//of corresponding sand parts in the calc matrix
-			for (j = 0; j < MULTIPLY; ++j)
-			{
-				for (i = 0; i < MULTIPLY; ++i)
-				{
-					//if theres sand in the field
-					if ((calcMatrix[(y * MULTIPLY) + j][(x * MULTIPLY) + i] == 1))
-					{
-						r += sandCol.r;
-						g += sandCol.g;
-						b += sandCol.b;
-					}
-				}
-			}
-
-			//divide to get the average brightness
-			outCol.r = r / (MULTIPLY * MULTIPLY);
-			outCol.g = g / (MULTIPLY * MULTIPLY);
-			outCol.b = b / (MULTIPLY * MULTIPLY);
-
-			//calculate the led nr
-			ledNr = y * 8;
-			if (reversed)
-			{
-				ledNr += 7 - x;
-			}
-			else
-			{
-				ledNr += x;
-			}
-
-			//save the color to the array used by the dma
-			WS2812_LED_BUF[ledNr] = outCol;
-		}
-	}
-}
