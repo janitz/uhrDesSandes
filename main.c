@@ -93,7 +93,7 @@ void TIM2_IRQHandler()
 
         switch (state) {
 			case 0:
-				ratio -= 0.002;
+				ratio -= 0.005;
 				filter++;
 				if (filter > 24){filter = 24;}
 				if (ratio < 0)
@@ -111,7 +111,7 @@ void TIM2_IRQHandler()
 				}
 				angle += 2;
 				filter--;
-				if (filter < 2){filter = 2;}
+				if (filter < 4){filter = 4;}
 				if (angle > 180)
 				{
 					angle = 180;
@@ -120,7 +120,7 @@ void TIM2_IRQHandler()
 				}
 				break;
 			case 2:
-				ratio += 0.002;
+				ratio += 0.005;
 				filter++;
 				if (filter > 24){filter = 24;}
 				if (ratio > 1)
@@ -138,7 +138,7 @@ void TIM2_IRQHandler()
 				}
 				angle += 2;
 				filter--;
-				if (filter < 2){filter = 2;}
+				if (filter < 4){filter = 4;}
 				if (angle > 360)
 				{
 					angle = 0;

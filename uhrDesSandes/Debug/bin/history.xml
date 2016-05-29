@@ -1,23 +1,23 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <history>
-   <processor signature="4.8.4 -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wall -g -nostartfiles -Map=uhrDesSandes.map -O2 --gc-sections -LC:\Program Files\CoIDE\configuration\ProgramData\uhrDesSandes -TC:\Program Files\CoIDE\configuration\ProgramData\uhrDesSandes/arm-gcc-link.ld -g">
-      <target file="uhrDesSandes.elf" lastModified="154f9636a41">
-         <source file="..\obj\stm32f4xx_syscfg.o" lastModified="154f9633efd"/>
-         <source file="..\obj\ws2812.o" lastModified="154f963419e"/>
-         <source file="..\obj\sand.o" lastModified="154f9634497"/>
-         <source file="..\obj\stm32f4xx_pwr.o" lastModified="154f9634a6d"/>
-         <source file="..\obj\startup_stm32f4xx.o" lastModified="154f9634bd3"/>
-         <source file="..\obj\main.o" lastModified="154f9634d66"/>
-         <source file="..\obj\stm32f4xx_rcc.o" lastModified="154f9634fd4"/>
-         <source file="..\obj\init.o" lastModified="154f963517a"/>
-         <source file="..\obj\stm32f4xx_gpio.o" lastModified="154f96353bf"/>
-         <source file="..\obj\system_stm32f4xx.o" lastModified="154f9635580"/>
-         <source file="..\obj\syscalls.o" lastModified="154f9635701"/>
-         <source file="..\obj\stm32f4xx_dma.o" lastModified="154f9635964"/>
-         <source file="..\obj\stm32f4xx_exti.o" lastModified="154f9635b36"/>
-         <source file="..\obj\misc.o" lastModified="154f9635d25"/>
-         <source file="..\obj\stm32f4xx_rtc.o" lastModified="154f96360c9"/>
-         <source file="..\obj\stm32f4xx_tim.o" lastModified="154f9636539"/>
+   <processor signature="5.3.1 -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -g2 -nostartfiles -Map=uhrDesSandes.map -O2 --gc-sections -LC:\Users\Janis\AppData\Roaming\CooCox\CoIDE\configuration\ProgramData\uhrDesSandes -TC:\Users\Janis\AppData\Roaming\CooCox\CoIDE\configuration\ProgramData\uhrDesSandes/arm-gcc-link.ld -g">
+      <target file="uhrDesSandes.elf" lastModified="154fcc643ee">
+         <source file="..\obj\stm32f4xx_gpio.o" lastModified="154fcc639e5"/>
+         <source file="..\obj\startup_stm32f4xx.o" lastModified="154fcc636a2"/>
+         <source file="..\obj\stm32f4xx_dma.o" lastModified="154fcc63bce"/>
+         <source file="..\obj\stm32f4xx_rcc.o" lastModified="154fcc63883"/>
+         <source file="..\obj\stm32f4xx_pwr.o" lastModified="154fcc6364f"/>
+         <source file="..\obj\ws2812.o" lastModified="154fcc63437"/>
+         <source file="..\obj\stm32f4xx_exti.o" lastModified="154fcc63c62"/>
+         <source file="..\obj\system_stm32f4xx.o" lastModified="154fcc63a76"/>
+         <source file="..\obj\misc.o" lastModified="154fcc63ceb"/>
+         <source file="..\obj\syscalls.o" lastModified="154fcc63aed"/>
+         <source file="..\obj\init.o" lastModified="154fcc63928"/>
+         <source file="..\obj\stm32f4xx_tim.o" lastModified="154fcc6417b"/>
+         <source file="..\obj\stm32f4xx_rtc.o" lastModified="154fcc63f14"/>
+         <source file="..\obj\sand.o" lastModified="154fcc635af"/>
+         <source file="..\obj\stm32f4xx_syscfg.o" lastModified="154fcc632df"/>
+         <source file="..\obj\main.o" lastModified="154fcc6373f"/>
       </target>
    </processor>
 </history>

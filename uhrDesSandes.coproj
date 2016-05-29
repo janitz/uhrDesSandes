@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Project version="2G - 1.7.7" name="uhrDesSandes">
+<Project version="2G - 2.0.3" name="uhrDesSandes">
   <Target name="uhrDesSandes" isCurrent="1">
-    <Device manufacturerId="9" manufacturerName="ST" chipId="344" chipName="STM32F407VG" boardId="" boardName=""/>
+    <Device manufacturerId="9" manufacturerName="ST" chipId="261" chipName="STM32F407VG" boardId="" boardName="" boardUrl="" coreId="" coreName=""/>
     <BuildOption>
       <Compile>
         <Option name="OptimizationLevel" value="2"/>
@@ -9,6 +9,8 @@
         <Option name="UserEditCompiler" value=""/>
         <Option name="SupportCPlusplus" value="0"/>
         <Option name="FPU" value="2"/>
+        <Option name="DEBUG" value="2"/>
+        <Option name="WARNING" value="1"/>
         <Includepaths>
           <Includepath path="."/>
         </Includepaths>
@@ -35,7 +37,7 @@
           <Memory name="IROM2" type="ReadOnly" size="" startValue=""/>
           <Memory name="IRAM2" type="ReadWrite" size="0x00010000" startValue="0x10000000"/>
         </MemoryAreas>
-        <LocateLinkFile path="../../../../../../../program files/coide/configuration/programdata/uhrdessandes/arm-gcc-link.ld" type="0"/>
+        <LocateLinkFile path="../../../appdata/roaming/coocox/coide/configuration/programdata/uhrdessandes/arm-gcc-link.ld" type="0"/>
       </Link>
       <Output>
         <Option name="OutputFileType" value="0"/>
@@ -66,24 +68,25 @@
       <Option name="org.coocox.codebugger.gdbjtag.core.autoDownload" value="1"/>
       <Option name="org.coocox.codebugger.gdbjtag.core.verify" value="1"/>
       <Option name="org.coocox.codebugger.gdbjtag.core.downloadFuction" value="Erase Effected"/>
-      <Option name="org.coocox.codebugger.gdbjtag.core.defaultAlgorithm" value="./stm32f4xx_1024.elf"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.defaultAlgorithm" value="C:\Users\Janis\AppData\Roaming\CooCox\CoIDE\config\flash\CooCox-Flash\CoIDE_STM32F4xx_1024K\STM32F4xx_1024.elf"/>
     </DebugOption>
     <ExcludeFile/>
   </Target>
   <Components path="./">
-    <Component id="30" name="C Library" path="" type="2"/>
-    <Component id="54" name="M4 CMSIS Core" path="" type="2"/>
-    <Component id="500" name="CMSIS BOOT" path="" type="2"/>
-    <Component id="501" name="RCC" path="" type="2"/>
-    <Component id="502" name="PWR" path="" type="2"/>
-    <Component id="504" name="GPIO" path="" type="2"/>
-    <Component id="505" name="EXTI" path="" type="2"/>
-    <Component id="506" name="RTC" path="" type="2"/>
-    <Component id="511" name="DMA" path="" type="2"/>
-    <Component id="513" name="TIM" path="" type="2"/>
-    <Component id="524" name="MISC" path="" type="2"/>
-    <Component id="526" name="SYSCFG" path="" type="2"/>
+    <Component id="30" name="C Library" path="" type="BasicComponet"/>
+    <Component id="54" name="M4 CMSIS Core" path="" type="BasicComponet"/>
+    <Component id="500" name="CMSIS BOOT" path="" type="BasicComponet"/>
+    <Component id="501" name="RCC" path="" type="BasicComponet"/>
+    <Component id="502" name="PWR" path="" type="BasicComponet"/>
+    <Component id="504" name="GPIO" path="" type="BasicComponet"/>
+    <Component id="505" name="EXTI" path="" type="BasicComponet"/>
+    <Component id="506" name="RTC" path="" type="BasicComponet"/>
+    <Component id="511" name="DMA" path="" type="BasicComponet"/>
+    <Component id="513" name="TIM" path="" type="BasicComponet"/>
+    <Component id="524" name="MISC" path="" type="BasicComponet"/>
+    <Component id="526" name="SYSCFG" path="" type="BasicComponet"/>
   </Components>
+  <LocalComponents/>
   <Files>
     <File name="cmsis_lib/source/stm32f4xx_gpio.c" path="cmsis_lib/source/stm32f4xx_gpio.c" type="1"/>
     <File name="cmsis_boot/startup/startup_stm32f4xx.c" path="cmsis_boot/startup/startup_stm32f4xx.c" type="1"/>
@@ -96,8 +99,8 @@
     <File name="globalVars.h" path="globalVars.h" type="1"/>
     <File name="ws2812.c" path="ws2812.c" type="1"/>
     <File name="cmsis_boot/cmsis" path="" type="2"/>
-    <File name="cmsis_boot/startup" path="" type="2"/>
     <File name="cmsis_boot/cmsis/core_cmInstr.h" path="cmsis_boot/cmsis/core_cmInstr.h" type="1"/>
+    <File name="cmsis_boot/startup" path="" type="2"/>
     <File name="cmsis_boot/stm32f4xx.h" path="cmsis_boot/stm32f4xx.h" type="1"/>
     <File name="cmsis_lib/include/stm32f4xx_exti.h" path="cmsis_lib/include/stm32f4xx_exti.h" type="1"/>
     <File name="cmsis_lib/source/stm32f4xx_exti.c" path="cmsis_lib/source/stm32f4xx_exti.c" type="1"/>
@@ -106,9 +109,9 @@
     <File name="sand.h" path="sand.h" type="1"/>
     <File name="cmsis_lib/source/misc.c" path="cmsis_lib/source/misc.c" type="1"/>
     <File name="cmsis_lib/include/stm32f4xx_tim.h" path="cmsis_lib/include/stm32f4xx_tim.h" type="1"/>
-    <File name="syscalls/syscalls.c" path="syscalls/syscalls.c" type="1"/>
-    <File name="cmsis_lib" path="" type="2"/>
     <File name="cmsis_boot/cmsis/core_cm4.h" path="cmsis_boot/cmsis/core_cm4.h" type="1"/>
+    <File name="cmsis_lib" path="" type="2"/>
+    <File name="syscalls/syscalls.c" path="syscalls/syscalls.c" type="1"/>
     <File name="init.c" path="init.c" type="1"/>
     <File name="ws2812.h" path="ws2812.h" type="1"/>
     <File name="cmsis_lib/source" path="" type="2"/>
@@ -129,4 +132,5 @@
     <File name="main.c" path="main.c" type="1"/>
     <File name="cmsis_lib/include/stm32f4xx_pwr.h" path="cmsis_lib/include/stm32f4xx_pwr.h" type="1"/>
   </Files>
+  <Bookmarks/>
 </Project>

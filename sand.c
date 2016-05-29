@@ -19,56 +19,71 @@ int32_t p_countValues(int32_t value, int32_t xOffset, int32_t yOffset);
 int32_t p_min(int32_t in1, int32_t in2);
 int32_t p_countBits(int32_t in);
 void p_changeValues(int32_t valueFrom, int32_t valueTo, int32_t xOffset, int32_t yOffset, int32_t count);
+int32_t p_getRelevantValue(int32_t in);
+int32_t p_getBitMask(int32_t width);
+
 
 
 void gravity(int32_t angle, int32_t randomDir)
 {
 	int32_t probabilities[8];
-	int32_t rand_max = 0;
-	int32_t i, x, y;
+	int32_t max_probability;
+	int32_t choosen_dir;
+	int32_t rand_max, rand_num;
+	int32_t i, x, y, yPre;
 	int32_t offs_x, offs_y;
 	int32_t check_x, check_y;
 	int32_t activeMatrix;
 
-	int32_t startVal, compVal, stepVal;
-
-	//calculate the probability for each direction
+	//calculate the probability for each direction to move
+	rand_max = 0;
+	max_probability = 0;
+	choosen_dir = 0;
 	for (i = 0; i < 8; i++)
 	{
 		probabilities[i] = p_probability(angle, i * 45);
 		rand_max += probabilities[i];
+
+		//preselect the direction with the most probability
+		if (probabilities[i] > max_probability)
+		{
+			max_probability = probabilities[i];
+			choosen_dir = i;
+		}
 	}
 
-	if (angle < 90 || angle >= 270)
+	//go through the matrix
+	//rows
+	for (yPre = 0; yPre < 16 * MULTIPLY; ++yPre)
 	{
-		startVal = 0;
-		compVal = 16 * MULTIPLY;
-		stepVal = 1;
-	}
-	else
-	{
-		startVal = (16 * MULTIPLY) - 1;
-		compVal = -1;
-		stepVal = -1;
+		//changes the order of calculating through the matrix depending on the gravity
+		//one peace of sand can possibly be moved multiple times depending on the calculating direction (important !!!)
+		if (angle < 90 || angle >= 270)
+		{
+			y = yPre;
+		}
+		else
+		{
+			y = (16 * MULTIPLY) - (yPre + 1);
+		}
 
-	}
-
-
-	for (y = startVal; y != compVal; y += stepVal)
-	{
+		//don't allow the sand to change matrix
 		activeMatrix = (y < 8 * MULTIPLY) ? 0 : 1;
 
+		//columns
 		for (x = 0; x < 8 * MULTIPLY; ++x)
 		{
-			if ((calcMatrix[y][x] & 1) && (calcMatrix[y][x] != -1)) // sand in the field
-			{
-				int32_t choosen_dir = 0;
-				int32_t rand_num = p_myRand() % rand_max;
-				int32_t max_probability = 0;
 
-				for (i = 0; i < 8; i++)
+			//if there's currently sand in the field
+			if (p_getRelevantValue(calcMatrix[y][x]) == 1)
+			{
+
+				//chose a random direction if required
+				//otherwise choosen direction is the one with the most probability
+				if (randomDir)
 				{
-					if (randomDir)
+					rand_num = p_myRand() % rand_max;
+					for (i = 0; i < 8; i++)
 					{
 						rand_num -= probabilities[i];
 						if (rand_num <= 0)
@@ -77,35 +92,32 @@ void gravity(int32_t angle, int32_t randomDir)
 							break;
 						}
 					}
-					else
-					{
-						if (probabilities[i] > max_probability)
-						{
-							max_probability = probabilities[i];
-							choosen_dir = i;
-						}
-
-					}
-
 				}
 
+				//get a scalable  x and y offset for the choosen direction
 				offs_x = p_pseudoCos(choosen_dir - 3);
 				offs_y = p_pseudoCos(choosen_dir - 1);
 
-				for (i = probabilities[choosen_dir] / (MULTIPLY + MULTIPLY - 1); i > 1; i--)
+
+				for (i = probabilities[choosen_dir] * MULTIPLY / 15; i > 0; i--)
 				{
+					//calculate the absolute position in the matrix
 					check_x = (offs_x * i) + x;
 					check_y = (offs_y * i) + y;
 
+					//don't allow the sand to leave its led matrix
 					if ((check_x >= 0) &&
 						(check_x < 8 * MULTIPLY) &&
 						(check_y >= (activeMatrix * 8 * MULTIPLY)) &&
 						(check_y < (8 * MULTIPLY) * (activeMatrix + 1)))
 					{
-						if ((!calcMatrix[check_y][check_x] & 1) && (calcMatrix[check_y][check_x] != -1))
+
+						//if the target position is free
+						if (p_getRelevantValue(calcMatrix[check_y][check_x]) == 0)
 						{
-							calcMatrix[y][x] &= ~1;
-							calcMatrix[check_y][check_x] |= 1;
+							//move the sand
+							calcMatrix[y][x] &= ~1; //set the last bit to 0 (get the sand)
+							calcMatrix[check_y][check_x] |= 1; //set the last bit to 1 (put the sand)
 							break;
 						}
 					}
@@ -117,6 +129,8 @@ void gravity(int32_t angle, int32_t randomDir)
 
 void sandFlow(int32_t angle, float ratio)
 {
+	//lets the sand flow if possible and necessary
+
 	int32_t sandToMove, moveableSand;
 
 	//negative if in matrix 1 is to much sand
@@ -125,76 +139,108 @@ void sandFlow(int32_t angle, float ratio)
 	while (angle < 0)   {angle += 360;}
 	while (angle >= 360){angle -= 360;}
 
+	//sand can only flow with the gravity
 	if ((angle <= 45 || angle >= 315) && sandToMove < 0)
 	{
-		sandToMove = - sandToMove;
+		sandToMove = -sandToMove;
+
+		//how much sand can move depends on how much sand and how much free space is available
 		moveableSand = p_min(p_countValues(1, 0, 7), p_countValues(0, 7, 8));
+
+		//also depends on how much sand has to be moved
 		sandToMove = p_min(sandToMove, moveableSand);
-		p_changeValues(0, 1, 7, 8, sandToMove);
-		p_changeValues(1, 0, 0, 7, sandToMove);
+
+		//move the sand
+		p_changeValues(1, 0, 0, 7, sandToMove); //get the sand
+		p_changeValues(0, 1, 7, 8, sandToMove); //put the sand
+
 	}
 	else if ((angle <= 225 && angle >= 135) && sandToMove > 0)
 	{
+		//how much sand can move depends on how much sand and how much free space is available
 		moveableSand = p_min(p_countValues(1, 7, 8), p_countValues(0, 0, 7));
+
+		//also depends on how much sand has to be moved
 		sandToMove = p_min(sandToMove, moveableSand);
-		p_changeValues(0, 1, 0, 7, sandToMove);
-		p_changeValues(1, 0, 7, 8, sandToMove);
+
+		//move the sand
+		p_changeValues(1, 0, 7, 8, sandToMove); //get the sand
+		p_changeValues(0, 1, 0, 7, sandToMove);	//put the sand
 	}
 }
 
-void sandToWS2812(int32_t filterBits)
+void sandToWS2812(int32_t filter)
 {
+	//translates the calcMatrix to the WS2812 buffer array
+	//filter uses the average sand amount of the last (1 - 16) cycles
+
 	rgb24_t outCol;
 	int32_t i, j, x, y;
+	int32_t xPos, yPos;
+	int32_t fieldValue;
+	int32_t lsb;
 	int32_t sand_count, sand_count_FIR;
+
+	int32_t filterMask;
 
 	int32_t reversed; //bool
 	int32_t ledNr;
 
+	//how much sand is in which led matrix
 	sandCount0 = 0;
 	sandCount1 = 0;
 
-	int32_t addedBits = 0;
-	for(i = 0; i < filterBits; i++)
-	{
-		addedBits += (1 << i);
-	}
 
-	//rows of the led matix
+	filterMask = p_getBitMask(filter);
+
 	for (y = 0; y < 16; ++y)
 	{
 		//the led matrix is a serpentine, so every second line is reversed
 		reversed = y % 2;
-		//columns  of the led matix
 
 		for (x = 0; x < 8; ++x)
 		{
+			//sand currently in the pixel
 			sand_count = 0;
+
+			//sand in the pixel (last 1 - 16 cycles)
 			sand_count_FIR = 0;
 
-			//each led pixel has a MULTIPLY by MULTIPLY field
-			//of corresponding sand parts in the calc matrix
+			//sub matrix of each pixel
 			for (j = 0; j < MULTIPLY; ++j)
 			{
 				for (i = 0; i < MULTIPLY; ++i)
 				{
-					int32_t xPos = (x * MULTIPLY) + i;
-					int32_t yPos = (y * MULTIPLY) + j;
+					//absolute position in the matrix
+					xPos = (x * MULTIPLY) + i;
+					yPos = (y * MULTIPLY) + j;
 
-					if(calcMatrix[yPos][xPos] >= 0)
-					{
-						sand_count_FIR += p_countBits(calcMatrix[yPos][xPos] & addedBits);
-						calcMatrix[yPos][xPos] = ((calcMatrix[yPos][xPos] << 1) + (calcMatrix[yPos][xPos] & 1)) & 0xFFFF;
-					}
+					//get the value of the field
+					fieldValue = calcMatrix[yPos][xPos];
 
-					//if there's sand in the field
-					if ((calcMatrix[yPos][xPos] & 1) && (calcMatrix[yPos][xPos] != -1))
+					//negative would be the mask
+					if(fieldValue >= 0)
 					{
-						sand_count ++;
+						//last bit
+						lsb = fieldValue & 1;
+
+						//add sand of the last cycles
+						sand_count_FIR += p_countBits(fieldValue & filterMask);
+
+						//move the history but preserve the lsb (current sand state)
+						//& 0xFFFF is for avoiding to change the sign bit while preserving the history of 16 cycles
+						calcMatrix[yPos][xPos] = ((fieldValue << 1) + lsb) & 0xFFFF;
+
+						//count the current sand
+						if (lsb)
+						{
+							sand_count ++;
+						}
 					}
 				}
 			}
 
+			//add the counted sand to the right matrix statistic
 			if( y < 8)
 			{
 				sandCount0 += sand_count;
@@ -204,10 +250,12 @@ void sandToWS2812(int32_t filterBits)
 				sandCount1 += sand_count;
 			}
 
+
 			//divide to get the average brightness
-			outCol.r = sandCol.r * sand_count_FIR / (MULTIPLY * MULTIPLY * filterBits);
-			outCol.g = sandCol.g * sand_count_FIR / (MULTIPLY * MULTIPLY * filterBits);
-			outCol.b = sandCol.b * sand_count_FIR / (MULTIPLY * MULTIPLY * filterBits);
+			int32_t divisor = MULTIPLY * MULTIPLY * filter;
+			outCol.r = sandCol.r * sand_count_FIR / divisor;
+			outCol.g = sandCol.g * sand_count_FIR / divisor;
+			outCol.b = sandCol.b * sand_count_FIR / divisor;
 
 			//calculate the led nr
 			ledNr = y * 8;
@@ -230,29 +278,40 @@ void sandToWS2812(int32_t filterBits)
 
 int32_t p_probability(int32_t gravity_angle, int32_t neighbor_angle)
 {
+	/*
+	 * calculates the probability for the sand to move to this direction
+	 * the probability is big if the both angles point to the same direction
+	 */
+
 	//each val in 0 - 360
 	while (gravity_angle < 0)    { gravity_angle += 360;  }
 	while (gravity_angle > 360)  { gravity_angle -= 360;  }
 	while (neighbor_angle < 0)   { neighbor_angle += 360; }
 	while (neighbor_angle > 360) { neighbor_angle -= 360; }
 
-
 	int32_t ret;
 
+	//get the angle between the both directions
 	ret = p_positive(gravity_angle - neighbor_angle);
+
+	//the angle between the directions can not be bigger than 180°
 	if (ret > 180)
 	{
 		ret = 360 - ret;
 	}
 
-	ret = 100 * (180 - ret) / 180; // ret in 0-100
+	// ret in 0-100
+	ret = 100 * (180 - ret) / 180;
 	return ret;
 }
 
 uint32_t p_myRand()
 {
+	//a simple and fast implementation of a random generator
+
 	//xorshift random from https://en.wikipedia.org/wiki/Xorshift
-	uint32_t rand_t = rand_x;
+	uint32_t rand_t;
+	rand_t = rand_x;
 	rand_t ^= rand_t << 11;
 	rand_t ^= rand_t >> 8;
 	rand_x = rand_y;
@@ -265,6 +324,7 @@ uint32_t p_myRand()
 
 int32_t p_positive(int32_t in)
 {
+	//removes the sign of an int
 	if (in < 0)
 	{
 		return -in;
@@ -277,6 +337,15 @@ int32_t p_positive(int32_t in)
 
 int32_t p_pseudoCos(int32_t dir)
 {
+	/*
+	 * returns the rounded cos for 8 directions
+	 *
+	 * to get the neighbor fields in the matrix
+	 *
+	 * in:  int dir (dir * PI / 4 = angle(rad))
+	 * out: int cos (rounded to -1;0;1)
+	 */
+
 	while(dir < 0){dir += 8;}
 	while(dir >= 8){dir -= 8;}
 
@@ -301,31 +370,9 @@ int32_t p_pseudoCos(int32_t dir)
 	}
 }
 
-int32_t p_countValues(int32_t value, int32_t xOffset, int32_t yOffset)
-{
-	int32_t x, y, count;
-
-	count = 0;
-
-	for (y = 0; y < MULTIPLY; ++y)
-	{
-		for (x = 0; x < MULTIPLY; ++x)
-		{
-			int32_t xPos = x + (xOffset * MULTIPLY);
-			int32_t yPos = y + (yOffset * MULTIPLY);
-
-			if ((calcMatrix[yPos][xPos] & 1) == value && (calcMatrix[yPos][xPos] != -1))
-			{
-				count++;
-			}
-		}
-	}
-
-	return count;
-}
-
 int32_t p_min(int32_t in1, int32_t in2)
 {
+	//returns the smaller one of the two inputs
 	if (in1 < in2)
 	{
 		return in1;
@@ -338,7 +385,7 @@ int32_t p_min(int32_t in1, int32_t in2)
 
 int32_t p_countBits(int32_t in)
 {
-	//counts the 16 lsb
+	//counts the 16 last significant bits in a fast way
 	in = (in & 0x5555) + ((in >> 1) & 0x5555); //55 = 01010101
 	in = (in & 0x3333) + ((in >> 2) & 0x3333); //33 = 00110011
 	in = (in & 0x0F0F) + ((in >> 4) & 0x0F0F); //0F = 00001111
@@ -346,8 +393,33 @@ int32_t p_countBits(int32_t in)
 	return in;
 }
 
+int32_t p_countValues(int32_t value, int32_t xOffset, int32_t yOffset)
+{
+	//counts the occurrence of a value in a pixel submatrix
+	int32_t x, y, count;
+
+	count = 0;
+
+	for (y = 0; y < MULTIPLY; ++y)
+	{
+		for (x = 0; x < MULTIPLY; ++x)
+		{
+			int32_t xPos = x + (xOffset * MULTIPLY);
+			int32_t yPos = y + (yOffset * MULTIPLY);
+
+			if (p_getRelevantValue(calcMatrix[yPos][xPos]) == value)
+			{
+				count++;
+			}
+		}
+	}
+
+	return count;
+}
+
 void p_changeValues(int32_t valueFrom, int32_t valueTo, int32_t xOffset, int32_t yOffset, int32_t count)
 {
+	//changes values in a pixel submatrix
 	int32_t x, y;
 
 	for (y = 0; y < MULTIPLY; ++y)
@@ -358,18 +430,42 @@ void p_changeValues(int32_t valueFrom, int32_t valueTo, int32_t xOffset, int32_t
 			int32_t xPos = x + (xOffset * MULTIPLY);
 			int32_t yPos = y + (yOffset * MULTIPLY);
 
-			if ((calcMatrix[yPos][xPos] & 1) == valueFrom && (calcMatrix[yPos][xPos] != -1))
+			if (p_getRelevantValue(calcMatrix[yPos][xPos]) == valueFrom)
 			{
-				calcMatrix[yPos][xPos] &= valueTo;
-				calcMatrix[yPos][xPos] |= valueTo;
-
 				count--;
-				if (count <= 0)
+				if (count < 0)
 				{
 					return;
 				}
+
+				//only set the last bit
+				calcMatrix[yPos][xPos] = (calcMatrix[yPos][xPos] & ~1) + valueTo;
+
 			}
 		}
 	}
 	return;
 }
+
+int32_t p_getRelevantValue(int32_t in)
+{
+	//returns -1;0;1
+	//if its not -1 then return the last bit
+	if (in != -1)
+	{
+		in = in & 1;
+	}
+
+	return in;
+}
+
+int32_t p_getBitMask(int32_t width)
+{
+	//returns a bitmask
+	// 3 would return 0b111
+	// 5 would return 0b11111
+
+	return (1 << width) - 1;
+
+}
+
