@@ -25,6 +25,8 @@ float ratio = 1;
 int32_t filter = 2;
 int32_t anim_count = 0;
 
+int32_t calcOrNot = 0;
+
 int main(void)
 {
 	uint32_t n;
@@ -74,7 +76,7 @@ void TIM2_IRQHandler()
 
     	GPIOD->ODR ^= GPIO_Pin_15;//if the blue led is blinking the interrupt works :)
 
-#ifdef foooo
+/*
     	int32_t j, x, y;
         for (y = 0; y < (16 * MULTIPLY) + (8 * MULTIPLY); ++y) {
 			for (x = 0; x < 8 * MULTIPLY; ++x) {
@@ -89,11 +91,11 @@ void TIM2_IRQHandler()
 
         anim_count++;
         if ((anim_count / 8) > (16 * MULTIPLY) + (8 * MULTIPLY)) anim_count = 0;
-#endif
+*/
 
         switch (state) {
 			case 0:
-				ratio -= 0.005;
+				ratio -= 0.0025;
 				filter++;
 				if (filter > 24){filter = 24;}
 				if (ratio < 0)
@@ -109,7 +111,11 @@ void TIM2_IRQHandler()
 					anim_count ++;
 					break;
 				}
-				angle += 2;
+				angle += 1;
+				if (angle > 155)
+				{
+					ratio += 0.00125;
+				}
 				filter--;
 				if (filter < 4){filter = 4;}
 				if (angle > 180)
@@ -120,7 +126,7 @@ void TIM2_IRQHandler()
 				}
 				break;
 			case 2:
-				ratio += 0.005;
+				ratio += 0.0025;
 				filter++;
 				if (filter > 24){filter = 24;}
 				if (ratio > 1)
@@ -136,10 +142,14 @@ void TIM2_IRQHandler()
 					anim_count ++;
 					break;
 				}
-				angle += 2;
+				angle -= 1;
+				if (angle < 25)
+				{
+					ratio -= 0.00125;
+				}
 				filter--;
 				if (filter < 4){filter = 4;}
-				if (angle > 360)
+				if (angle < 0)
 				{
 					angle = 0;
 					state = 0;
@@ -155,11 +165,21 @@ void TIM2_IRQHandler()
 				break;
 		}
 
-        gravity(angle, -1);
-        sandFlow(angle, ratio);
-        gravity(angle, 0);
-		sandToWS2812(filter / 2);
-        ws2812_refresh();
+        calcOrNot ++;
+        if(calcOrNot > 1)
+        {
+        	calcOrNot = 0;
+        }
+
+        if(calcOrNot == 0)
+        {
+        	gravity(angle, -1);
+			sandFlow(angle, ratio);
+			gravity(angle, 0);
+        }
+        sandToWS2812(filter / 2);
+
+    	ws2812_refresh();
     }
 }
 

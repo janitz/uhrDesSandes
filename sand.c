@@ -9,6 +9,18 @@ uint32_t rand_w = 1112;
 int32_t sandCount0 = 0;
 int32_t sandCount1 = 0;
 
+//tan array (0-89 deg)
+float tangens[90] = {0,      0.0175, 0.0349, 0.0524, 0.0699, 0.0875, 0.1051, 0.1228, 0.1405, 0.1584,
+					 0.1763, 0.1944, 0.2126, 0.2309, 0.2493, 0.2679, 0.2867, 0.3057, 0.3249, 0.3443,
+					 0.364,  0.3839, 0.404,  0.4245, 0.4452, 0.4663, 0.4877, 0.5095, 0.5317, 0.5543,
+					 0.5774, 0.6009, 0.6249, 0.6494, 0.6745, 0.7002, 0.7265, 0.7536, 0.7813, 0.8098,
+					 0.8391, 0.8693, 0.9004, 0.9325, 0.9657, 1,      1.0355, 1.0724, 1.1106, 1.1504,
+					 1.1918, 1.2349, 1.2799, 1.327,  1.3764, 1.4281, 1.4826, 1.5399, 1.6003, 1.6643,
+					 1.7321, 1.804,  1.8807, 1.9626, 2.0503, 2.1445, 2.246,  2.3559, 2.4751, 2.6051,
+					 2.7475, 2.9042, 3.0777, 3.2709, 3.4874, 3.7321, 4.0108, 4.3315, 4.7046, 5.1446,
+					 5.6713, 6.3138, 7.1154, 8.1443, 9.5144,11.4301,14.3007,19.0811,28.6363,57.29 };
+
+
 
 //private functions
 int32_t p_probability(int32_t gravity_angle, int32_t neighbor_angle);
@@ -21,7 +33,8 @@ int32_t p_countBits(int32_t in);
 void p_changeValues(int32_t valueFrom, int32_t valueTo, int32_t xOffset, int32_t yOffset, int32_t count);
 int32_t p_getRelevantValue(int32_t in);
 int32_t p_getBitMask(int32_t width);
-
+void p_fallingSandLine(int32_t angle);
+void p_setLineValue(int32_t x, int32_t y);
 
 
 void gravity(int32_t angle, int32_t randomDir)
@@ -98,8 +111,8 @@ void gravity(int32_t angle, int32_t randomDir)
 				offs_x = p_pseudoCos(choosen_dir - 3);
 				offs_y = p_pseudoCos(choosen_dir - 1);
 
-
-				for (i = probabilities[choosen_dir] * MULTIPLY / 15; i > 0; i--)
+				//probability(0-100) / 33 = 0-3led pixel
+				for (i = probabilities[choosen_dir] * MULTIPLY / 33; i > 0; i--)
 				{
 					//calculate the absolute position in the matrix
 					check_x = (offs_x * i) + x;
@@ -154,6 +167,8 @@ void sandFlow(int32_t angle, float ratio)
 		p_changeValues(1, 0, 0, 7, sandToMove); //get the sand
 		p_changeValues(0, 1, 7, 8, sandToMove); //put the sand
 
+		p_fallingSandLine(angle);
+
 	}
 	else if ((angle <= 225 && angle >= 135) && sandToMove > 0)
 	{
@@ -166,6 +181,9 @@ void sandFlow(int32_t angle, float ratio)
 		//move the sand
 		p_changeValues(1, 0, 7, 8, sandToMove); //get the sand
 		p_changeValues(0, 1, 0, 7, sandToMove);	//put the sand
+
+		p_fallingSandLine(angle);
+
 	}
 }
 
@@ -269,7 +287,7 @@ void sandToWS2812(int32_t filter)
 			}
 
 			//save the color to the array used by the dma
-			WS2812_LED_BUF[ledNr] = outCol;
+			WS2812_LED_BUF[ledNr + 1] = outCol;
 		}
 
 
@@ -469,3 +487,65 @@ int32_t p_getBitMask(int32_t width)
 
 }
 
+void p_fallingSandLine(int32_t angle)
+{
+	int32_t preX, preY;
+	int32_t x, y;
+	int32_t offsX, offsY;
+	int32_t multX, multY;
+
+	if(angle <= 44 || angle >= 316)
+	{
+		offsX = (8 * MULTIPLY) - 1;
+		offsY = 8 * MULTIPLY;
+		multX = -1;
+		multY = 1;
+
+		//angle from 1 to 89
+		if (angle >= 316)
+		{
+			angle -= 360;
+		}
+		angle += 45;
+	}
+	else if(angle <= 224 && angle >= 136)
+	{
+		offsX = 0;
+		offsY = (8 * MULTIPLY) - 1;
+		multX = 1;
+		multY = -1;
+
+		//angle from 1 to 89
+		angle -= 135;
+	}
+	else
+	{
+		return;
+	}
+
+
+	for (preY = 0; preY < 8 * MULTIPLY; ++preY)
+	{
+		y = offsY + (preY * multY);
+		x = offsX + (tangens[90 - angle] * preY * multX);
+		p_setLineValue(x, y);
+	}
+
+	for (preX = 0; preX < 8 * MULTIPLY; ++preX)
+	{
+		x = offsX + (preX * multX);
+		y = offsY + (tangens[angle] * preX * multY);
+		p_setLineValue(x, y);
+	}
+
+}
+
+
+void p_setLineValue(int32_t x, int32_t y)
+{
+	if(((y >= 0) && (y < 16 * MULTIPLY)) &&
+	   ((x >= 0) && (x < 8 * MULTIPLY)))
+	{
+		calcMatrix[y][x] |= 2; //second bit
+	}
+}
