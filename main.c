@@ -37,6 +37,7 @@ int main(void)
 	InitGpioD();
 	InitTimer();
 	EnableTimerInterrupt();
+	InitPWM();
 
 
 	// init WS2812-chains
@@ -95,6 +96,7 @@ void TIM2_IRQHandler()
 
         switch (state) {
 			case 0:
+				TIM4->CCR1 = 2000;
 				ratio -= 0.0025;
 				filter++;
 				if (filter > 24){filter = 24;}
@@ -106,6 +108,7 @@ void TIM2_IRQHandler()
 				}
 				break;
 			case 1:
+				TIM4->CCR1 = 4000;
 				if (anim_count < 50)
 				{
 					anim_count ++;
@@ -126,6 +129,7 @@ void TIM2_IRQHandler()
 				}
 				break;
 			case 2:
+				TIM4->CCR1 = 2000;
 				ratio += 0.0025;
 				filter++;
 				if (filter > 24){filter = 24;}
@@ -137,6 +141,7 @@ void TIM2_IRQHandler()
 				}
 				break;
 			case 3:
+				TIM4->CCR1 = 4000;
 				if (anim_count < 50)
 				{
 					anim_count ++;
@@ -180,6 +185,10 @@ void TIM2_IRQHandler()
         sandToWS2812(filter / 2);
 
     	ws2812_refresh();
+
+
+
+
     }
 }
 

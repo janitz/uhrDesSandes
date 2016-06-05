@@ -10,6 +10,7 @@ volatile int32_t calcMatrix[16 * MULTIPLY][8 * MULTIPLY];
 void InitGpioD();
 void InitTimer();
 void EnableTimerInterrupt();
+void InitPWM(void);
 void initMatrix();
 
 #endif

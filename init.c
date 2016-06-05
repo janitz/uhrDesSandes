@@ -4,19 +4,31 @@
 void InitGpioD()
 {
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
+
+
 	GPIO_InitTypeDef GPIO_InitType;
-	GPIO_InitType.GPIO_Pin = GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15;
+
+	GPIO_InitType.GPIO_Pin = GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15;
 	GPIO_InitType.GPIO_Mode = GPIO_Mode_OUT;
 	GPIO_InitType.GPIO_OType = GPIO_OType_PP;
-	GPIO_InitType.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_InitType.GPIO_Speed = GPIO_Speed_100MHz;
 	GPIO_InitType.GPIO_PuPd = GPIO_PuPd_NOPULL;
 	GPIO_Init(GPIOD, &GPIO_InitType);
+
+
+	GPIO_PinAFConfig(GPIOD, GPIO_PinSource12, GPIO_AF_TIM4);
+
+	GPIO_InitType.GPIO_Pin = GPIO_Pin_12;
+	GPIO_InitType.GPIO_Mode = GPIO_Mode_AF;
+	GPIO_Init(GPIOD, &GPIO_InitType);
+
 }
 
 void InitTimer()
 {
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
 	TIM_TimeBaseInitTypeDef timerInitStructure;
+
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
 	timerInitStructure.TIM_Prescaler = 4000;
 	timerInitStructure.TIM_CounterMode = TIM_CounterMode_Up;
 	timerInitStructure.TIM_Period = 400;
@@ -25,6 +37,16 @@ void InitTimer()
 	TIM_TimeBaseInit(TIM2, &timerInitStructure);
 	TIM_Cmd(TIM2, ENABLE);
 	TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
+
+
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
+	timerInitStructure.TIM_Prescaler = 42 - 1; //84000000 / 42 = 2000000
+	timerInitStructure.TIM_CounterMode = TIM_CounterMode_Up;
+	timerInitStructure.TIM_Period = 8000 - 1; //2000000 / 8000 = 250
+	timerInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
+	timerInitStructure.TIM_RepetitionCounter = 0;
+	TIM_TimeBaseInit(TIM4, &timerInitStructure);
+	TIM_Cmd(TIM4, ENABLE);
 }
 
 void EnableTimerInterrupt()
@@ -35,6 +57,19 @@ void EnableTimerInterrupt()
     nvicStructure.NVIC_IRQChannelSubPriority = 1;
     nvicStructure.NVIC_IRQChannelCmd = ENABLE;
     NVIC_Init(&nvicStructure);
+}
+
+void InitPWM(void)
+{
+	TIM_OCInitTypeDef TIM_OCStruct;
+
+	/* PWM mode 2 = Clear on compare match */
+	TIM_OCStruct.TIM_OCMode = TIM_OCMode_PWM2;
+	TIM_OCStruct.TIM_OutputState = TIM_OutputState_Enable;
+	TIM_OCStruct.TIM_OCPolarity = TIM_OCPolarity_Low;
+	TIM_OCStruct.TIM_Pulse = 0;
+	TIM_OC1Init(TIM4, &TIM_OCStruct);
+	TIM_OC1PreloadConfig(TIM4, TIM_OCPreload_Enable);
 }
 
 void initMatrix()
