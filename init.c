@@ -29,9 +29,9 @@ void InitTimer()
 	TIM_TimeBaseInitTypeDef timerInitStructure;
 
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
-	timerInitStructure.TIM_Prescaler = 4000;
+	timerInitStructure.TIM_Prescaler = 4000 - 1;
 	timerInitStructure.TIM_CounterMode = TIM_CounterMode_Up;
-	timerInitStructure.TIM_Period = 400;
+	timerInitStructure.TIM_Period = 400 - 1;
 	timerInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
 	timerInitStructure.TIM_RepetitionCounter = 0;
 	TIM_TimeBaseInit(TIM2, &timerInitStructure);
@@ -42,7 +42,7 @@ void InitTimer()
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
 	timerInitStructure.TIM_Prescaler = 42 - 1; //84000000 / 42 = 2000000
 	timerInitStructure.TIM_CounterMode = TIM_CounterMode_Up;
-	timerInitStructure.TIM_Period = 8000 - 1; //2000000 / 8000 = 250
+	timerInitStructure.TIM_Period = 40000 - 1; //2000000 / 40000 = 50
 	timerInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
 	timerInitStructure.TIM_RepetitionCounter = 0;
 	TIM_TimeBaseInit(TIM4, &timerInitStructure);

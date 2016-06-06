@@ -94,9 +94,9 @@
     <File name="sand.h" path="sand.h" type="1"/>
     <File name="cmsis_lib/source/misc.c" path="cmsis_lib/source/misc.c" type="1"/>
     <File name="cmsis_lib/include/stm32f4xx_tim.h" path="cmsis_lib/include/stm32f4xx_tim.h" type="1"/>
-    <File name="cmsis_boot/cmsis/core_cm4.h" path="cmsis_boot/cmsis/core_cm4.h" type="1"/>
-    <File name="cmsis_lib" path="" type="2"/>
     <File name="syscalls/syscalls.c" path="syscalls/syscalls.c" type="1"/>
+    <File name="cmsis_lib" path="" type="2"/>
+    <File name="cmsis_boot/cmsis/core_cm4.h" path="cmsis_boot/cmsis/core_cm4.h" type="1"/>
     <File name="init.c" path="init.c" type="1"/>
     <File name="ws2812.h" path="ws2812.h" type="1"/>
     <File name="cmsis_lib/source" path="" type="2"/>

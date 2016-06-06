@@ -27,6 +27,8 @@ int32_t anim_count = 0;
 
 int32_t calcOrNot = 0;
 
+void setServo(int32_t angle);
+
 int main(void)
 {
 	uint32_t n;
@@ -96,7 +98,6 @@ void TIM2_IRQHandler()
 
         switch (state) {
 			case 0:
-				TIM4->CCR1 = 2000;
 				ratio -= 0.0025;
 				filter++;
 				if (filter > 24){filter = 24;}
@@ -108,7 +109,6 @@ void TIM2_IRQHandler()
 				}
 				break;
 			case 1:
-				TIM4->CCR1 = 4000;
 				if (anim_count < 50)
 				{
 					anim_count ++;
@@ -129,7 +129,6 @@ void TIM2_IRQHandler()
 				}
 				break;
 			case 2:
-				TIM4->CCR1 = 2000;
 				ratio += 0.0025;
 				filter++;
 				if (filter > 24){filter = 24;}
@@ -141,7 +140,6 @@ void TIM2_IRQHandler()
 				}
 				break;
 			case 3:
-				TIM4->CCR1 = 4000;
 				if (anim_count < 50)
 				{
 					anim_count ++;
@@ -185,11 +183,25 @@ void TIM2_IRQHandler()
         sandToWS2812(filter / 2);
 
     	ws2812_refresh();
-
+    	setServo(angle);
 
 
 
     }
 }
+
+
+void setServo(int32_t angle) // 0-180
+{
+	int32_t cycle = 20000; //us
+	int32_t cw = 40000 - 1; //continuous wave
+
+	int32_t zero = cw * 550 / cycle;     // %
+	int32_t hundred = cw * 2280 / cycle;  // %
+
+	TIM4->CCR1 = zero + ((hundred - zero) * angle / 180);
+}
+
+
 
 
