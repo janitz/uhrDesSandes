@@ -51,9 +51,9 @@ int main(void)
 	col1.g = 0;
 	col1.r = 0;
 
+	sandCol.r = 40; // 40
+	sandCol.g = 30; // 30
 	sandCol.b = 0;
-	sandCol.g = 30;
-	sandCol.r = 40;
 
 	for (n = 0; n < WS2812_CHAIN_LEN; n++)
 	{
@@ -115,9 +115,9 @@ void TIM2_IRQHandler()
 					break;
 				}
 				angle += 1;
-				if (angle > 155)
+				if (angle > 100)
 				{
-					ratio += 0.00125;
+					ratio += 0.00025;
 				}
 				filter--;
 				if (filter < 4){filter = 4;}
@@ -146,9 +146,9 @@ void TIM2_IRQHandler()
 					break;
 				}
 				angle -= 1;
-				if (angle < 25)
+				if (angle < 80)
 				{
-					ratio -= 0.00125;
+					ratio -= 0.00025;
 				}
 				filter--;
 				if (filter < 4){filter = 4;}
@@ -177,12 +177,16 @@ void TIM2_IRQHandler()
         if(calcOrNot == 0)
         {
         	gravity(angle, -1);
-			sandFlow(angle, ratio);
+
 			gravity(angle, 0);
         }
+        sandFlow(angle, ratio);
         sandToWS2812(filter / 2);
 
     	ws2812_refresh();
+
+
+
     	setServo(angle);
 
 
@@ -196,8 +200,8 @@ void setServo(int32_t angle) // 0-180
 	int32_t cycle = 20000; //us
 	int32_t cw = 40000 - 1; //continuous wave
 
-	int32_t zero = cw * 550 / cycle;     // %
-	int32_t hundred = cw * 2280 / cycle;  // %
+	int32_t zero = cw * 920 / cycle;     // %
+	int32_t hundred = cw * 2130 / cycle;  // %
 
 	TIM4->CCR1 = zero + ((hundred - zero) * angle / 180);
 }
