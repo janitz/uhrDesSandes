@@ -72,6 +72,22 @@ void InitPWM(void)
 	TIM_OC1PreloadConfig(TIM4, TIM_OCPreload_Enable);
 }
 
+void InitSPI(void)
+{
+	SPI_InitTypeDef SPI_initStruct;
+	SPI_initStruct.SPI_Mode = SPI_Mode_Master;
+	SPI_initStruct.SPI_Direction = SPI_Direction_Tx;
+	SPI_initStruct.SPI_DataSize = SPI_DataSize_16b;
+	SPI_initStruct.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_128;
+	SPI_initStruct.SPI_FirstBit = SPI_FirstBit_LSB;
+	SPI_initStruct.SPI_NSS = SPI_NSS_Hard;
+	//SPI_initStruct.SPI_CPHA = SPI_CPHA_1Edge;
+	//SPI_initStruct.SPI_CPOL = SPI_CPOL_High;
+
+
+
+}
+
 void initMatrix()
 {
 	int32_t y = 0;
