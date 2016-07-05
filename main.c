@@ -20,7 +20,7 @@
 rgb24_t sandCol;
 
 int32_t angle = 0;
-int32_t state = 0;
+volatile int32_t state = -1;
 float ratio = 1;
 int32_t filter = 2;
 int32_t anim_count = 0;
@@ -28,6 +28,7 @@ int32_t anim_count = 0;
 int32_t calcOrNot = 0;
 
 void setServo(int32_t angle);
+void handleButton(uint32_t nr);
 
 int main(void)
 {
@@ -79,92 +80,32 @@ void TIM2_IRQHandler()
 
     	GPIOD->ODR ^= GPIO_Pin_15;//if the blue led is blinking the interrupt works :)
 
-/*
-    	int32_t j, x, y;
-        for (y = 0; y < (16 * MULTIPLY) + (8 * MULTIPLY); ++y) {
-			for (x = 0; x < 8 * MULTIPLY; ++x) {
-				j = y + x - (8 * MULTIPLY);
-				if (j < 16 * MULTIPLY && j >= 0)
-				{
-					calcMatrix[j][x] = 0;
-					if(y == anim_count / 8) calcMatrix[j][x] = 1;
-				}
-			}
+    	//debounce
+    	if(debounceCount > 0){debounceCount--;}
+
+
+    	if(angle > 100 && ratio < 1)
+    	{
+    		ratio += 0.0025;
+    	}
+    	if(angle < 80 && ratio > 0)
+		{
+			ratio -= 0.0025;
 		}
 
-        anim_count++;
-        if ((anim_count / 8) > (16 * MULTIPLY) + (8 * MULTIPLY)) anim_count = 0;
-*/
 
-        switch (state) {
+    	switch (state) {
 			case 0:
-				ratio -= 0.0025;
-				filter++;
-				if (filter > 24){filter = 24;}
-				if (ratio < 0)
-				{
-					ratio = 0;
-					state = 1;
-					anim_count = 0;
-				}
+				if (angle > 0){angle--;}
 				break;
 			case 1:
-				if (anim_count < 50)
-				{
-					anim_count ++;
-					break;
-				}
-				angle += 1;
-				if (angle > 100)
-				{
-					ratio += 0.00025;
-				}
-				filter--;
-				if (filter < 4){filter = 4;}
-				if (angle > 180)
-				{
-					angle = 180;
-					state = 2;
-					anim_count = 0;
-				}
-				break;
-			case 2:
-				ratio += 0.0025;
-				filter++;
-				if (filter > 24){filter = 24;}
-				if (ratio > 1)
-				{
-					ratio = 1;
-					state = 3;
-					anim_count = 0;
-				}
-				break;
-			case 3:
-				if (anim_count < 50)
-				{
-					anim_count ++;
-					break;
-				}
-				angle -= 1;
-				if (angle < 80)
-				{
-					ratio -= 0.00025;
-				}
-				filter--;
-				if (filter < 4){filter = 4;}
-				if (angle < 0)
-				{
-					angle = 0;
-					state = 0;
-					anim_count = 0;
-				}
+				if (angle < 180){angle++;}
 				break;
 			default:
 				angle = 0;
 				state = 0;
-				ratio = 1;
-				anim_count = 0;
-				filter = 2;
+				ratio = 0;
+				filter = 4;
 				break;
 		}
 
@@ -194,6 +135,58 @@ void TIM2_IRQHandler()
     }
 }
 
+void EXTI0_IRQHandler(void)
+{
+	if (EXTI_GetITStatus(EXTI_Line0) != RESET) {
+		EXTI_ClearITPendingBit(EXTI_Line0);
+		if(debounceCount == 0)
+		{
+			debounceCount = DEBOUNCE_VAL;
+			handleButton(0);
+		}
+	}
+}
+
+void EXTI1_IRQHandler(void)
+{
+	if (EXTI_GetITStatus(EXTI_Line1) != RESET) {
+		EXTI_ClearITPendingBit(EXTI_Line1);
+		if(debounceCount == 0)
+		{
+			debounceCount = DEBOUNCE_VAL;
+			handleButton(1);
+		}
+	}
+}
+
+void EXTI2_IRQHandler(void)
+{
+	if (EXTI_GetITStatus(EXTI_Line2) != RESET) {
+		EXTI_ClearITPendingBit(EXTI_Line2);
+		if(debounceCount == 0)
+		{
+			debounceCount = DEBOUNCE_VAL;
+			handleButton(2);
+		}
+	}
+}
+
+void EXTI3_IRQHandler(void) {
+	if (EXTI_GetITStatus(EXTI_Line3) != RESET) {
+		EXTI_ClearITPendingBit(EXTI_Line3);
+		if(debounceCount == 0)
+		{
+			debounceCount = DEBOUNCE_VAL;
+			handleButton(3);
+		}
+	}
+}
+
+void handleButton(uint32_t nr)
+{
+	GPIOD->ODR ^= GPIO_Pin_14;//if the blue led is blinking the interrupt works :)
+	state = ~state & 1;
+}
 
 void setServo(int32_t angle) // 0-180
 {

@@ -3,11 +3,12 @@
 
 void InitGpioD()
 {
+	//onboard led pins (D12-D15)
+
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
 
-
+	//Discovery LEDs
 	GPIO_InitTypeDef GPIO_InitType;
-
 	GPIO_InitType.GPIO_Pin = GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15;
 	GPIO_InitType.GPIO_Mode = GPIO_Mode_OUT;
 	GPIO_InitType.GPIO_OType = GPIO_OType_PP;
@@ -16,11 +17,68 @@ void InitGpioD()
 	GPIO_Init(GPIOD, &GPIO_InitType);
 
 
+	//discovery led toggle with timer interrupt :) (to see if it works)
 	GPIO_PinAFConfig(GPIOD, GPIO_PinSource12, GPIO_AF_TIM4);
 
 	GPIO_InitType.GPIO_Pin = GPIO_Pin_12;
 	GPIO_InitType.GPIO_Mode = GPIO_Mode_AF;
 	GPIO_Init(GPIOD, &GPIO_InitType);
+
+
+
+	//buttons
+	debounceCount = 0;
+	EXTI_InitTypeDef EXTI_InitStruct;
+	NVIC_InitTypeDef NVIC_InitStruct;
+
+	// Enable clock for SYSCFG
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
+
+	// Set pin as input
+	GPIO_InitType.GPIO_Pin = GPIO_Pin_0|GPIO_Pin_1|GPIO_Pin_2|GPIO_Pin_3;
+	GPIO_InitType.GPIO_Mode = GPIO_Mode_IN;
+	GPIO_InitType.GPIO_PuPd = GPIO_PuPd_UP;
+	GPIO_Init(GPIOD, &GPIO_InitType);
+
+	// Tell system that you will use PD0 for EXTI_Line0
+	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOD, EXTI_PinSource0);
+	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOD, EXTI_PinSource1);
+	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOD, EXTI_PinSource2);
+	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOD, EXTI_PinSource3);
+
+
+	//enable interrupts
+	EXTI_InitStruct.EXTI_LineCmd = ENABLE;
+	EXTI_InitStruct.EXTI_Mode = EXTI_Mode_Interrupt;
+	EXTI_InitStruct.EXTI_Trigger = EXTI_Trigger_Falling;
+
+	EXTI_InitStruct.EXTI_Line = EXTI_Line0;
+	EXTI_Init(&EXTI_InitStruct);
+
+	EXTI_InitStruct.EXTI_Line = EXTI_Line1;
+	EXTI_Init(&EXTI_InitStruct);
+
+	EXTI_InitStruct.EXTI_Line = EXTI_Line2;
+	EXTI_Init(&EXTI_InitStruct);
+
+	EXTI_InitStruct.EXTI_Line = EXTI_Line3;
+	EXTI_Init(&EXTI_InitStruct);
+
+	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 0x00;
+	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 0x00;
+	NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;
+
+	NVIC_InitStruct.NVIC_IRQChannel = EXTI0_IRQn;
+	NVIC_Init(&NVIC_InitStruct);
+
+	NVIC_InitStruct.NVIC_IRQChannel = EXTI1_IRQn;
+	NVIC_Init(&NVIC_InitStruct);
+
+	NVIC_InitStruct.NVIC_IRQChannel = EXTI2_IRQn;
+	NVIC_Init(&NVIC_InitStruct);
+
+	NVIC_InitStruct.NVIC_IRQChannel = EXTI3_IRQn;
+	NVIC_Init(&NVIC_InitStruct);
 
 }
 
@@ -28,6 +86,7 @@ void InitTimer()
 {
 	TIM_TimeBaseInitTypeDef timerInitStructure;
 
+	//sand engine interrupt timer
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
 	timerInitStructure.TIM_Prescaler = 4000 - 1;
 	timerInitStructure.TIM_CounterMode = TIM_CounterMode_Up;
@@ -38,7 +97,7 @@ void InitTimer()
 	TIM_Cmd(TIM2, ENABLE);
 	TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
 
-
+	//servo pwm timer
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
 	timerInitStructure.TIM_Prescaler = 42 - 1; //84000000 / 42 = 2000000
 	timerInitStructure.TIM_CounterMode = TIM_CounterMode_Up;

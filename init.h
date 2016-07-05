@@ -6,6 +6,8 @@
 #include "globalVars.h"
 
 volatile int32_t calcMatrix[16 * MULTIPLY][8 * MULTIPLY];
+volatile int32_t debounceCount;
+
 
 void InitGpioD();
 void InitTimer();

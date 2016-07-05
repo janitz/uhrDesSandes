@@ -167,7 +167,10 @@ void sandFlow(int32_t angle, float ratio)
 		p_changeValues(1, 0, 0, 7, sandToMove); //get the sand
 		p_changeValues(0, 1, 7, 8, sandToMove); //put the sand
 
-		p_fallingSandLine(angle);
+		if(ratio < 1)
+		{
+			p_fallingSandLine(angle);
+		}
 
 	}
 	else if ((angle <= 225 && angle >= 135) && sandToMove > 0)
@@ -182,7 +185,10 @@ void sandFlow(int32_t angle, float ratio)
 		p_changeValues(1, 0, 7, 8, sandToMove); //get the sand
 		p_changeValues(0, 1, 0, 7, sandToMove);	//put the sand
 
-		p_fallingSandLine(angle);
+		if(ratio > 0)
+		{
+			p_fallingSandLine(angle);
+		}
 
 	}
 }
