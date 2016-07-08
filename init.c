@@ -140,8 +140,8 @@ void InitSPI(void)
 	SPI_initStruct.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_128;
 	SPI_initStruct.SPI_FirstBit = SPI_FirstBit_LSB;
 	SPI_initStruct.SPI_NSS = SPI_NSS_Hard;
-	//SPI_initStruct.SPI_CPHA = SPI_CPHA_1Edge;
-	//SPI_initStruct.SPI_CPOL = SPI_CPOL_High;
+	SPI_initStruct.SPI_CPHA = SPI_CPHA_1Edge;
+	SPI_initStruct.SPI_CPOL = SPI_CPOL_Low;
 
 
 
