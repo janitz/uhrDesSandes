@@ -19,10 +19,10 @@
 
 rgb24_t sandCol;
 
-int32_t angle = 0;
+int32_t angle[100] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 volatile int32_t state = -1;
 float ratio = 1;
-int32_t filter = 2;
+int32_t filter = 4;
 int32_t anim_count = 0;
 
 int32_t calcOrNot = 0;
@@ -30,17 +30,32 @@ int32_t calcOrNot = 0;
 void setServo(int32_t angle);
 void handleButton(uint32_t nr);
 
+void sendSettings(uint8_t addr, uint8_t data)
+{
+	SPI1->DR = (((uint16_t)addr) << 8) + data;
+	while( !(SPI1->SR & SPI_I2S_FLAG_TXE) ); // wait until transmit complete
+}
+
 int main(void)
 {
 	uint32_t n;
 
-	initMatrix();
 	SystemInit(); // init quarz settings
+
+	initMatrix();
+
+	for (n = 0; n < 20; n++)
+	{
+		gravity(0, -1);
+	}
+
 
 	InitGpioD();
 	InitTimer();
 	EnableTimerInterrupt();
 	InitPWM();
+
+	InitSPI();
 
 
 	// init WS2812-chains
@@ -64,10 +79,18 @@ int main(void)
 	// start dma
 	ws2812_refresh();
 
+	// send a few settings to the ledmatrix driver max 7219
+	sendSettings(0x0C, 0x00);  // shutdownmode on
+	sendSettings(0x09, 0x00);  // no decode
+	sendSettings(0x0A, 0x05);  // intensity
+	sendSettings(0x0B, 0x07);  // 8 columns to scan
+	sendSettings(0x0C, 0x01);  // shutdownmode off
+	sendSettings(0x0F, 0x00);  // displaytest off
+
 
     while(1)
     {
-
+    	sendSettings(1, 255);
 
     }
 }
@@ -78,57 +101,56 @@ void TIM2_IRQHandler()
     {
     	TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
 
-    	GPIOD->ODR ^= GPIO_Pin_15;//if the blue led is blinking the interrupt works :)
+    	//if the blue led is blinking the interrupt works :)
+    	GPIOD->ODR ^= GPIO_Pin_15;
 
     	//debounce
     	if(debounceCount > 0){debounceCount--;}
 
-
-    	if(angle > 100 && ratio < 1)
+    	int32_t n;
+    	for(n = 0; n < 99; n++)
     	{
-    		ratio += 0.0025;
+    		angle[n + 1] = angle[n];
     	}
-    	if(angle < 80 && ratio > 0)
+
+
+    	if(angle[99] > 120 && ratio < 1)
+    	{
+    		ratio += 0.0021; //10s
+    	}
+    	if(angle[99] < 60 && ratio > 0)
 		{
-			ratio -= 0.0025;
+			ratio -= 0.0021; //10s
 		}
 
 
     	switch (state) {
 			case 0:
-				if (angle > 0){angle--;}
+				if (angle[0] > 0){angle[0] -= 2;}
 				break;
 			case 1:
-				if (angle < 180){angle++;}
+				if (angle[0] < 180){angle[0] += 2;}
 				break;
 			default:
-				angle = 0;
+				angle[0] = 0;
 				state = 0;
 				ratio = 0;
-				filter = 4;
 				break;
 		}
 
-        calcOrNot ++;
-        if(calcOrNot > 1)
-        {
-        	calcOrNot = 0;
-        }
+    	int buttoncolor;
 
-        if(calcOrNot == 0)
-        {
-        	gravity(angle, -1);
 
-			gravity(angle, 0);
-        }
-        sandFlow(angle, ratio);
+    	gravity(angle[99], -1);
+    	gravity(angle[99], 0);
+    	buttoncolor = sandFlow(angle[99], ratio);
         sandToWS2812(filter / 2);
 
     	ws2812_refresh();
 
 
 
-    	setServo(angle);
+    	setServo(angle[0]);
 
 
 

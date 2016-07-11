@@ -140,7 +140,7 @@ void gravity(int32_t angle, int32_t randomDir)
 	}
 }
 
-void sandFlow(int32_t angle, float ratio)
+int32_t sandFlow(int32_t angle, float ratio)
 {
 	//lets the sand flow if possible and necessary
 
@@ -167,10 +167,7 @@ void sandFlow(int32_t angle, float ratio)
 		p_changeValues(1, 0, 0, 7, sandToMove); //get the sand
 		p_changeValues(0, 1, 7, 8, sandToMove); //put the sand
 
-		if(ratio < 1)
-		{
-			p_fallingSandLine(angle);
-		}
+
 
 	}
 	else if ((angle <= 225 && angle >= 135) && sandToMove > 0)
@@ -185,12 +182,19 @@ void sandFlow(int32_t angle, float ratio)
 		p_changeValues(1, 0, 7, 8, sandToMove); //get the sand
 		p_changeValues(0, 1, 0, 7, sandToMove);	//put the sand
 
-		if(ratio > 0)
-		{
-			p_fallingSandLine(angle);
-		}
+
 
 	}
+	if(sandToMove > 0)
+	{
+		p_fallingSandLine(angle);
+	}
+
+	if (angle % 180 == 0)
+	{
+		return sandToMove;
+	}
+	return -1;
 }
 
 void sandToWS2812(int32_t filter)

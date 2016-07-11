@@ -7,7 +7,7 @@
 
 //public functions
 void gravity(int32_t angle, int32_t randomDir);
-void sandFlow(int32_t angle, float ratio);
+int32_t sandFlow(int32_t angle, float ratio);
 void sandToWS2812(int32_t filterBits);
 
 #endif

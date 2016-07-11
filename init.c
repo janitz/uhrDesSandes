@@ -133,14 +133,31 @@ void InitPWM(void)
 
 void InitSPI(void)
 {
+
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
+
+	GPIO_InitTypeDef GPIO_InitStruct;
+	GPIO_InitStruct.GPIO_Pin = GPIO_Pin_7 | GPIO_Pin_5 | GPIO_Pin_4;
+	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_AF;
+	GPIO_InitStruct.GPIO_OType = GPIO_OType_PP;
+	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_NOPULL;
+	GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+	GPIO_PinAFConfig(GPIOA, GPIO_PinSource4, GPIO_AF_SPI1);
+	GPIO_PinAFConfig(GPIOA, GPIO_PinSource5, GPIO_AF_SPI1);
+	GPIO_PinAFConfig(GPIOA, GPIO_PinSource7, GPIO_AF_SPI1);
+
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
+
 	SPI_InitTypeDef SPI_initStruct;
 	SPI_initStruct.SPI_Mode = SPI_Mode_Master;
 	SPI_initStruct.SPI_Direction = SPI_Direction_Tx;
 	SPI_initStruct.SPI_DataSize = SPI_DataSize_16b;
 	SPI_initStruct.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_128;
-	SPI_initStruct.SPI_FirstBit = SPI_FirstBit_LSB;
+	SPI_initStruct.SPI_FirstBit = SPI_FirstBit_MSB;
 	SPI_initStruct.SPI_NSS = SPI_NSS_Hard;
-	SPI_initStruct.SPI_CPHA = SPI_CPHA_1Edge;
+	SPI_initStruct = SPI_CPHA_2Edge;
 	SPI_initStruct.SPI_CPOL = SPI_CPOL_Low;
 
 
@@ -186,7 +203,7 @@ void initMatrix()
 	}
 
 	int32_t count = 0;
-	for (y = 0; y < 8 * MULTIPLY; ++y)
+	for (y = 8 * MULTIPLY; y < 16 * MULTIPLY; ++y)
 	{
 		for (x = 0; x < 8 * MULTIPLY; ++x)
 		{
