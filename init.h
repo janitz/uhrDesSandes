@@ -12,8 +12,7 @@ volatile int32_t debounceCount;
 void InitGpioD();
 void InitTimer();
 void EnableTimerInterrupt();
-void InitPWM(void);
+void InitPWM();
 void initMatrix();
-
 
 #endif

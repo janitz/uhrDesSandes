@@ -21,6 +21,7 @@ rgb24_t sandCol;
 
 int32_t angle[100] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 volatile int32_t state = -1;
+volatile int32_t buttoncolor = -1;
 float ratio = 1;
 int32_t filter = 4;
 int32_t anim_count = 0;
@@ -30,10 +31,71 @@ int32_t calcOrNot = 0;
 void setServo(int32_t angle);
 void handleButton(uint32_t nr);
 
-void sendSettings(uint8_t addr, uint8_t data)
+void sendSettings(uint8_t adress, uint8_t data)
 {
-	SPI1->DR = (((uint16_t)addr) << 8) + data;
-	while( !(SPI1->SR & SPI_I2S_FLAG_TXE) ); // wait until transmit complete
+	uint32_t cnt;
+	uint32_t i;
+
+	//select low
+	for (i = 0; i < 100; ++i)
+	{
+		GPIO_ResetBits(GPIOA, GPIO_Pin_4);
+	}
+
+
+	for(cnt = 0; cnt < 8; cnt++)
+	{
+		if(adress & (128 >> cnt))
+		{
+			GPIO_SetBits(GPIOA, GPIO_Pin_7);
+		}
+		else
+		{
+			GPIO_ResetBits(GPIOA, GPIO_Pin_7);
+		}
+
+		for (i = 0; i < 100; ++i)
+		{
+			GPIO_SetBits(GPIOA, GPIO_Pin_5);
+		}
+		for (i = 0; i < 100; ++i)
+		{
+			GPIO_ResetBits(GPIOA, GPIO_Pin_5);
+		}
+
+	}
+
+	for(cnt = 0; cnt < 8; cnt++)
+		{
+			if(data & (128 >> cnt))
+			{
+				GPIO_SetBits(GPIOA, GPIO_Pin_7);
+			}
+			else
+			{
+				GPIO_ResetBits(GPIOA, GPIO_Pin_7);
+			}
+
+			for (i = 0; i < 100; ++i)
+			{
+				GPIO_SetBits(GPIOA, GPIO_Pin_5);
+			}
+			for (i = 0; i < 100; ++i)
+			{
+				GPIO_ResetBits(GPIOA, GPIO_Pin_5);
+			}
+
+		}
+
+
+
+	//select high
+	for (i = 0; i < 100; ++i)
+	{
+		GPIO_SetBits(GPIOA, GPIO_Pin_4);
+	}
+
+
 }
 
 int main(void)
@@ -55,9 +117,6 @@ int main(void)
 	EnableTimerInterrupt();
 	InitPWM();
 
-	InitSPI();
-
-
 	// init WS2812-chains
 	ws2812_init();
 
@@ -76,21 +135,35 @@ int main(void)
 		WS2812_LED_BUF[n] = col1;
 	}
 
-	// start dma
-	ws2812_refresh();
-
 	// send a few settings to the ledmatrix driver max 7219
-	sendSettings(0x0C, 0x00);  // shutdownmode on
-	sendSettings(0x09, 0x00);  // no decode
-	sendSettings(0x0A, 0x05);  // intensity
-	sendSettings(0x0B, 0x07);  // 8 columns to scan
-	sendSettings(0x0C, 0x01);  // shutdownmode off
-	sendSettings(0x0F, 0x00);  // displaytest off
+	sendSettings(12, 0);  // shutdownmode on
+	sendSettings(9, 0);  // no decode
+	sendSettings(10, 5);  // intensity
+	sendSettings(11, 7);  // 8 columns to scan
+	sendSettings(12, 1);  // shutdownmode off
+	sendSettings(13, 0);  // displaytest off
+
 
 
     while(1)
     {
-    	sendSettings(1, 255);
+    	//int xx = 10000;
+    	//while(xx--);
+    	//GPIOD->ODR ^= GPIO_Pin_13;
+
+
+    	if (buttoncolor)
+    	{
+    		sendSettings(1, 0); // rot 16 + 32 + 64 + 128
+			sendSettings(2, 0); // blau
+			sendSettings(3, 240); // grün
+    	}
+    	else
+    	{
+    		sendSettings(1, 240); // rot 16 + 32 + 64 + 128
+			sendSettings(2, 0); // blau
+			sendSettings(3, 0); // grün
+    	}
 
     }
 }
@@ -138,7 +211,7 @@ void TIM2_IRQHandler()
 				break;
 		}
 
-    	int buttoncolor;
+
 
 
     	gravity(angle[99], -1);
@@ -206,7 +279,7 @@ void EXTI3_IRQHandler(void) {
 
 void handleButton(uint32_t nr)
 {
-	GPIOD->ODR ^= GPIO_Pin_14;//if the blue led is blinking the interrupt works :)
+	GPIOD->ODR ^= GPIO_Pin_14;//the red led toggle
 	state = ~state & 1;
 }
 

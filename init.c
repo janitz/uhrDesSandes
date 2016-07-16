@@ -17,7 +17,7 @@ void InitGpioD()
 	GPIO_Init(GPIOD, &GPIO_InitType);
 
 
-	//discovery led toggle with timer interrupt :) (to see if it works)
+	//green discovery led toggle with pwm timer interrupt :) (to see if it works)
 	GPIO_PinAFConfig(GPIOD, GPIO_PinSource12, GPIO_AF_TIM4);
 
 	GPIO_InitType.GPIO_Pin = GPIO_Pin_12;
@@ -80,6 +80,19 @@ void InitGpioD()
 	NVIC_InitStruct.NVIC_IRQChannel = EXTI3_IRQn;
 	NVIC_Init(&NVIC_InitStruct);
 
+
+	//"SPI"
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
+
+	GPIO_InitType.GPIO_Pin = GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_7; // select / clk / MOSI
+	GPIO_InitType.GPIO_Mode = GPIO_Mode_OUT;
+	GPIO_InitType.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_InitType.GPIO_PuPd = GPIO_PuPd_UP;
+	GPIO_InitType.GPIO_OType = GPIO_OType_PP;
+	GPIO_Init(GPIOA, &GPIO_InitType);
+
+	GPIO_SetBits(GPIOA, GPIO_Pin_4);
+
 }
 
 void InitTimer()
@@ -131,38 +144,6 @@ void InitPWM(void)
 	TIM_OC1PreloadConfig(TIM4, TIM_OCPreload_Enable);
 }
 
-void InitSPI(void)
-{
-
-	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
-
-	GPIO_InitTypeDef GPIO_InitStruct;
-	GPIO_InitStruct.GPIO_Pin = GPIO_Pin_7 | GPIO_Pin_5 | GPIO_Pin_4;
-	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_AF;
-	GPIO_InitStruct.GPIO_OType = GPIO_OType_PP;
-	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_NOPULL;
-	GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-	GPIO_PinAFConfig(GPIOA, GPIO_PinSource4, GPIO_AF_SPI1);
-	GPIO_PinAFConfig(GPIOA, GPIO_PinSource5, GPIO_AF_SPI1);
-	GPIO_PinAFConfig(GPIOA, GPIO_PinSource7, GPIO_AF_SPI1);
-
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
-
-	SPI_InitTypeDef SPI_initStruct;
-	SPI_initStruct.SPI_Mode = SPI_Mode_Master;
-	SPI_initStruct.SPI_Direction = SPI_Direction_Tx;
-	SPI_initStruct.SPI_DataSize = SPI_DataSize_16b;
-	SPI_initStruct.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_128;
-	SPI_initStruct.SPI_FirstBit = SPI_FirstBit_MSB;
-	SPI_initStruct.SPI_NSS = SPI_NSS_Hard;
-	SPI_initStruct = SPI_CPHA_2Edge;
-	SPI_initStruct.SPI_CPOL = SPI_CPOL_Low;
-
-
-
-}
 
 void initMatrix()
 {

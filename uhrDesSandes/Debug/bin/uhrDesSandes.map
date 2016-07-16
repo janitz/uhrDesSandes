@@ -111,7 +111,7 @@ Linker script and memory map
 
                 0x20020000                _eram = 0x20020000
 
-.text           0x08000000     0x34b4
+.text           0x08000000     0x3524
  *(.isr_vector)
  .isr_vector    0x08000000      0x188 ..\obj\startup_stm32f4xx.o
                 0x08000000                g_pfnVectors
@@ -313,156 +313,155 @@ Linker script and memory map
                 0x080012c0                NVIC_SetVectorTable
                 0x080012d4                NVIC_SystemLPConfig
                 0x080012ec                SysTick_CLKSourceConfig
- .text          0x08001304      0x370 ..\obj\init.o
+ .text          0x08001304      0x348 ..\obj\init.o
                 0x08001304                InitGpioD
-                0x08001420                InitTimer
-                0x080014a4                EnableTimerInterrupt
-                0x080014cc                InitPWM
-                0x08001500                InitSPI
-                0x08001560                initMatrix
- .text          0x08001674      0xdb4 ..\obj\stm32f4xx_tim.o
-                0x08001674                TIM_DeInit
-                0x0800182c                TIM_TimeBaseInit
-                0x080018c4                TIM_TimeBaseStructInit
-                0x080018d8                TIM_PrescalerConfig
-                0x080018e0                TIM_CounterModeConfig
-                0x080018f0                TIM_SetCounter
-                0x080018f4                TIM_SetAutoreload
-                0x080018f8                TIM_GetCounter
-                0x080018fc                TIM_GetPrescaler
-                0x08001904                TIM_UpdateDisableConfig
-                0x08001920                TIM_UpdateRequestConfig
-                0x0800193c                TIM_ARRPreloadConfig
-                0x08001958                TIM_SelectOnePulseMode
-                0x08001970                TIM_SetClockDivision
-                0x08001988                TIM_Cmd
-                0x080019a4                TIM_OC1Init
-                0x08001a24                TIM_OC2Init
-                0x08001ab4                TIM_OC3Init
-                0x08001b40                TIM_OC4Init
-                0x08001bb4                TIM_OCStructInit
-                0x08001bc8                TIM_SelectOCxM
-                0x08001c18                TIM_SetCompare1
-                0x08001c1c                TIM_SetCompare2
-                0x08001c20                TIM_SetCompare3
-                0x08001c24                TIM_SetCompare4
-                0x08001c28                TIM_ForcedOC1Config
-                0x08001c38                TIM_ForcedOC2Config
-                0x08001c4c                TIM_ForcedOC3Config
-                0x08001c5c                TIM_ForcedOC4Config
-                0x08001c70                TIM_OC1PreloadConfig
-                0x08001c80                TIM_OC2PreloadConfig
-                0x08001c94                TIM_OC3PreloadConfig
-                0x08001ca4                TIM_OC4PreloadConfig
-                0x08001cb8                TIM_OC1FastConfig
-                0x08001cc8                TIM_OC2FastConfig
-                0x08001cdc                TIM_OC3FastConfig
-                0x08001cec                TIM_OC4FastConfig
-                0x08001d00                TIM_ClearOC1Ref
-                0x08001d10                TIM_ClearOC2Ref
-                0x08001d20                TIM_ClearOC3Ref
-                0x08001d30                TIM_ClearOC4Ref
-                0x08001d40                TIM_OC1PolarityConfig
-                0x08001d50                TIM_OC1NPolarityConfig
-                0x08001d60                TIM_OC2PolarityConfig
-                0x08001d74                TIM_OC2NPolarityConfig
-                0x08001d88                TIM_OC3PolarityConfig
-                0x08001d9c                TIM_OC3NPolarityConfig
-                0x08001db0                TIM_OC4PolarityConfig
-                0x08001dc4                TIM_CCxCmd
-                0x08001de4                TIM_CCxNCmd
-                0x08001e04                TIM_ICInit
-                0x08001f6c                TIM_ICStructInit
-                0x08001f7c                TIM_PWMIConfig
-                0x080020d4                TIM_GetCapture1
-                0x080020d8                TIM_GetCapture2
-                0x080020dc                TIM_GetCapture3
-                0x080020e0                TIM_GetCapture4
-                0x080020e4                TIM_SetIC1Prescaler
-                0x080020fc                TIM_SetIC2Prescaler
-                0x08002118                TIM_SetIC3Prescaler
-                0x08002130                TIM_SetIC4Prescaler
-                0x0800214c                TIM_BDTRConfig
-                0x08002174                TIM_BDTRStructInit
-                0x08002188                TIM_CtrlPWMOutputs
-                0x080021a8                TIM_SelectCOM
-                0x080021c4                TIM_CCPreloadControl
-                0x080021e0                TIM_GenerateEvent
-                0x080021e4                TIM_GetFlagStatus
-                0x080021f0                TIM_ClearFlag
-                0x080021f8                TIM_GetITStatus
-                0x08002210                TIM_ClearITPendingBit
-                0x08002218                TIM_DMAConfig
-                0x08002220                TIM_DMACmd
-                0x08002234                TIM_ITConfig
-                0x08002238                TIM_SelectCCDMA
-                0x08002254                TIM_InternalClockConfig
-                0x08002264                TIM_ITRxExternalClockConfig
-                0x08002280                TIM_TIxExternalClockConfig
-                0x08002308                TIM_ETRClockMode1Config
-                0x08002330                TIM_ETRClockMode2Config
-                0x08002354                TIM_SelectInputTrigger
-                0x08002364                TIM_SelectOutputTrigger
-                0x0800237c                TIM_SelectSlaveMode
-                0x08002394                TIM_SelectMasterSlaveMode
-                0x080023ac                TIM_ETRConfig
-                0x080023c4                TIM_EncoderInterfaceConfig
-                0x08002404                TIM_SelectHallSensor
-                0x08002420                TIM_RemapConfig
- .text          0x08002428      0x86c ..\obj\sand.o
-                0x08002428                sandToWS2812
-                0x080025dc                p_probability
-                0x08002638                p_myRand
-                0x08002664                p_positive
-                0x0800266c                p_pseudoCos
-                0x080026a8                gravity
-                0x080028ac                p_min
-                0x080028b4                p_countBits
-                0x080028ec                p_countValues
-                0x0800293c                p_changeValues
-                0x080029a8                p_getRelevantValue
-                0x080029b4                p_getBitMask
-                0x080029c0                p_fallingSandLine
-                0x08002ad8                sandFlow
-                0x08002c70                p_setLineValue
- .text          0x08002c94       0x80 ..\obj\stm32f4xx_syscfg.o
-                0x08002c94                SYSCFG_DeInit
-                0x08002cb0                SYSCFG_MemoryRemapConfig
-                0x08002cbc                SYSCFG_EXTILineConfig
-                0x08002cec                SYSCFG_ETH_MediaInterfaceConfig
-                0x08002cf8                SYSCFG_CompensationCellCmd
-                0x08002d04                SYSCFG_GetCompensationCellStatus
- *fill*         0x08002d14        0x4 
- .text          0x08002d18      0x2bc ..\obj\main.o
-                0x08002d18                sendSettings
-                0x08002d30                TIM2_IRQHandler
-                0x08002e78                EXTI0_IRQHandler
-                0x08002ebc                EXTI1_IRQHandler
-                0x08002f00                EXTI2_IRQHandler
-                0x08002f44                EXTI3_IRQHandler
-                0x08002f88                handleButton
-                0x08002fac                setServo
- .text.startup  0x08002fd4       0xd0 ..\obj\main.o
-                0x08002fd4                main
- .text          0x080030a4      0x370 c:/program files/gnu tools arm embedded/5.3 2016q1/bin/../lib/gcc/arm-none-eabi/5.3.1/armv7e-m/fpu\libgcc.a(_arm_addsubdf3.o)
-                0x080030a4                __aeabi_drsub
-                0x080030ac                __aeabi_dsub
-                0x080030ac                __subdf3
-                0x080030b0                __aeabi_dadd
-                0x080030b0                __adddf3
-                0x08003328                __floatunsidf
-                0x08003328                __aeabi_ui2d
-                0x08003348                __floatsidf
-                0x08003348                __aeabi_i2d
-                0x0800336c                __aeabi_f2d
-                0x0800336c                __extendsfdf2
-                0x080033a8                __floatundidf
-                0x080033a8                __aeabi_ul2d
-                0x080033b8                __floatdidf
-                0x080033b8                __aeabi_l2d
- .text          0x08003414       0xa0 c:/program files/gnu tools arm embedded/5.3 2016q1/bin/../lib/gcc/arm-none-eabi/5.3.1/armv7e-m/fpu\libgcc.a(_arm_truncdfsf2.o)
-                0x08003414                __truncdfsf2
-                0x08003414                __aeabi_d2f
+                0x08001458                InitTimer
+                0x080014dc                EnableTimerInterrupt
+                0x08001504                InitPWM
+                0x08001538                initMatrix
+ .text          0x0800164c      0xdb4 ..\obj\stm32f4xx_tim.o
+                0x0800164c                TIM_DeInit
+                0x08001804                TIM_TimeBaseInit
+                0x0800189c                TIM_TimeBaseStructInit
+                0x080018b0                TIM_PrescalerConfig
+                0x080018b8                TIM_CounterModeConfig
+                0x080018c8                TIM_SetCounter
+                0x080018cc                TIM_SetAutoreload
+                0x080018d0                TIM_GetCounter
+                0x080018d4                TIM_GetPrescaler
+                0x080018dc                TIM_UpdateDisableConfig
+                0x080018f8                TIM_UpdateRequestConfig
+                0x08001914                TIM_ARRPreloadConfig
+                0x08001930                TIM_SelectOnePulseMode
+                0x08001948                TIM_SetClockDivision
+                0x08001960                TIM_Cmd
+                0x0800197c                TIM_OC1Init
+                0x080019fc                TIM_OC2Init
+                0x08001a8c                TIM_OC3Init
+                0x08001b18                TIM_OC4Init
+                0x08001b8c                TIM_OCStructInit
+                0x08001ba0                TIM_SelectOCxM
+                0x08001bf0                TIM_SetCompare1
+                0x08001bf4                TIM_SetCompare2
+                0x08001bf8                TIM_SetCompare3
+                0x08001bfc                TIM_SetCompare4
+                0x08001c00                TIM_ForcedOC1Config
+                0x08001c10                TIM_ForcedOC2Config
+                0x08001c24                TIM_ForcedOC3Config
+                0x08001c34                TIM_ForcedOC4Config
+                0x08001c48                TIM_OC1PreloadConfig
+                0x08001c58                TIM_OC2PreloadConfig
+                0x08001c6c                TIM_OC3PreloadConfig
+                0x08001c7c                TIM_OC4PreloadConfig
+                0x08001c90                TIM_OC1FastConfig
+                0x08001ca0                TIM_OC2FastConfig
+                0x08001cb4                TIM_OC3FastConfig
+                0x08001cc4                TIM_OC4FastConfig
+                0x08001cd8                TIM_ClearOC1Ref
+                0x08001ce8                TIM_ClearOC2Ref
+                0x08001cf8                TIM_ClearOC3Ref
+                0x08001d08                TIM_ClearOC4Ref
+                0x08001d18                TIM_OC1PolarityConfig
+                0x08001d28                TIM_OC1NPolarityConfig
+                0x08001d38                TIM_OC2PolarityConfig
+                0x08001d4c                TIM_OC2NPolarityConfig
+                0x08001d60                TIM_OC3PolarityConfig
+                0x08001d74                TIM_OC3NPolarityConfig
+                0x08001d88                TIM_OC4PolarityConfig
+                0x08001d9c                TIM_CCxCmd
+                0x08001dbc                TIM_CCxNCmd
+                0x08001ddc                TIM_ICInit
+                0x08001f44                TIM_ICStructInit
+                0x08001f54                TIM_PWMIConfig
+                0x080020ac                TIM_GetCapture1
+                0x080020b0                TIM_GetCapture2
+                0x080020b4                TIM_GetCapture3
+                0x080020b8                TIM_GetCapture4
+                0x080020bc                TIM_SetIC1Prescaler
+                0x080020d4                TIM_SetIC2Prescaler
+                0x080020f0                TIM_SetIC3Prescaler
+                0x08002108                TIM_SetIC4Prescaler
+                0x08002124                TIM_BDTRConfig
+                0x0800214c                TIM_BDTRStructInit
+                0x08002160                TIM_CtrlPWMOutputs
+                0x08002180                TIM_SelectCOM
+                0x0800219c                TIM_CCPreloadControl
+                0x080021b8                TIM_GenerateEvent
+                0x080021bc                TIM_GetFlagStatus
+                0x080021c8                TIM_ClearFlag
+                0x080021d0                TIM_GetITStatus
+                0x080021e8                TIM_ClearITPendingBit
+                0x080021f0                TIM_DMAConfig
+                0x080021f8                TIM_DMACmd
+                0x0800220c                TIM_ITConfig
+                0x08002210                TIM_SelectCCDMA
+                0x0800222c                TIM_InternalClockConfig
+                0x0800223c                TIM_ITRxExternalClockConfig
+                0x08002258                TIM_TIxExternalClockConfig
+                0x080022e0                TIM_ETRClockMode1Config
+                0x08002308                TIM_ETRClockMode2Config
+                0x0800232c                TIM_SelectInputTrigger
+                0x0800233c                TIM_SelectOutputTrigger
+                0x08002354                TIM_SelectSlaveMode
+                0x0800236c                TIM_SelectMasterSlaveMode
+                0x08002384                TIM_ETRConfig
+                0x0800239c                TIM_EncoderInterfaceConfig
+                0x080023dc                TIM_SelectHallSensor
+                0x080023f8                TIM_RemapConfig
+ .text          0x08002400      0x86c ..\obj\sand.o
+                0x08002400                sandToWS2812
+                0x080025b4                p_probability
+                0x08002610                p_myRand
+                0x0800263c                p_positive
+                0x08002644                p_pseudoCos
+                0x08002680                gravity
+                0x08002884                p_min
+                0x0800288c                p_countBits
+                0x080028c4                p_countValues
+                0x08002914                p_changeValues
+                0x08002980                p_getRelevantValue
+                0x0800298c                p_getBitMask
+                0x08002998                p_fallingSandLine
+                0x08002ab0                sandFlow
+                0x08002c48                p_setLineValue
+ .text          0x08002c6c       0x80 ..\obj\stm32f4xx_syscfg.o
+                0x08002c6c                SYSCFG_DeInit
+                0x08002c88                SYSCFG_MemoryRemapConfig
+                0x08002c94                SYSCFG_EXTILineConfig
+                0x08002cc4                SYSCFG_ETH_MediaInterfaceConfig
+                0x08002cd0                SYSCFG_CompensationCellCmd
+                0x08002cdc                SYSCFG_GetCompensationCellStatus
+ *fill*         0x08002cec        0x4 
+ .text          0x08002cf0      0x354 ..\obj\main.o
+                0x08002cf0                sendSettings
+                0x08002d98                TIM2_IRQHandler
+                0x08002ee8                EXTI0_IRQHandler
+                0x08002f2c                EXTI1_IRQHandler
+                0x08002f70                EXTI2_IRQHandler
+                0x08002fb4                EXTI3_IRQHandler
+                0x08002ff8                handleButton
+                0x0800301c                setServo
+ .text.startup  0x08003044       0xd0 ..\obj\main.o
+                0x08003044                main
+ .text          0x08003114      0x370 c:/program files/gnu tools arm embedded/5.3 2016q1/bin/../lib/gcc/arm-none-eabi/5.3.1/armv7e-m/fpu\libgcc.a(_arm_addsubdf3.o)
+                0x08003114                __aeabi_drsub
+                0x0800311c                __aeabi_dsub
+                0x0800311c                __subdf3
+                0x08003120                __aeabi_dadd
+                0x08003120                __adddf3
+                0x08003398                __floatunsidf
+                0x08003398                __aeabi_ui2d
+                0x080033b8                __floatsidf
+                0x080033b8                __aeabi_i2d
+                0x080033dc                __aeabi_f2d
+                0x080033dc                __extendsfdf2
+                0x08003418                __floatundidf
+                0x08003418                __aeabi_ul2d
+                0x08003428                __floatdidf
+                0x08003428                __aeabi_l2d
+ .text          0x08003484       0xa0 c:/program files/gnu tools arm embedded/5.3 2016q1/bin/../lib/gcc/arm-none-eabi/5.3.1/armv7e-m/fpu\libgcc.a(_arm_truncdfsf2.o)
+                0x08003484                __truncdfsf2
+                0x08003484                __aeabi_d2f
  *(.init)
  *(.fini)
  *crtbegin.o(.ctors)
@@ -478,35 +477,35 @@ Linker script and memory map
  *(.rodata*)
  *(.eh_fram e*)
 
-.glue_7         0x080034b4        0x0
- .glue_7        0x080034b4        0x0 linker stubs
+.glue_7         0x08003524        0x0
+ .glue_7        0x08003524        0x0 linker stubs
 
-.glue_7t        0x080034b4        0x0
- .glue_7t       0x080034b4        0x0 linker stubs
+.glue_7t        0x08003524        0x0
+ .glue_7t       0x08003524        0x0 linker stubs
 
-.vfp11_veneer   0x080034b4        0x0
- .vfp11_veneer  0x080034b4        0x0 linker stubs
+.vfp11_veneer   0x08003524        0x0
+ .vfp11_veneer  0x08003524        0x0 linker stubs
 
-.v4_bx          0x080034b4        0x0
- .v4_bx         0x080034b4        0x0 linker stubs
+.v4_bx          0x08003524        0x0
+ .v4_bx         0x08003524        0x0 linker stubs
 
-.iplt           0x080034b4        0x0
- .iplt          0x080034b4        0x0 ..\obj\stm32f4xx_gpio.o
+.iplt           0x08003524        0x0
+ .iplt          0x08003524        0x0 ..\obj\stm32f4xx_gpio.o
 
-.rel.dyn        0x080034b4        0x0
- .rel.iplt      0x080034b4        0x0 ..\obj\stm32f4xx_gpio.o
+.rel.dyn        0x08003524        0x0
+ .rel.iplt      0x08003524        0x0 ..\obj\stm32f4xx_gpio.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x080034b4                __exidx_start = .
+                0x08003524                __exidx_start = .
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x080034b4                __exidx_end = .
-                0x080034b4                __etext = .
-                0x080034b4                _sidata = __etext
+                0x08003524                __exidx_end = .
+                0x08003524                __etext = .
+                0x08003524                _sidata = __etext
 
-.data           0x20000000      0x1a8 load address 0x080034b4
+.data           0x20000000      0x1ac load address 0x08003524
                 0x20000000                __data_start__ = .
                 0x20000000                _sdata = __data_start__
  *(vtable)
@@ -521,73 +520,75 @@ Linker script and memory map
                 0x2000002c                rand_z
                 0x20000030                rand_w
                 0x20000034                tangens
- .data          0x2000019c        0xc ..\obj\main.o
-                0x2000019c                ratio
-                0x200001a0                state
-                0x200001a4                filter
-                0x200001a8                . = ALIGN (0x4)
+ .data          0x2000019c       0x10 ..\obj\main.o
+                0x2000019c                buttoncolor
+                0x200001a0                ratio
+                0x200001a4                state
+                0x200001a8                filter
+                0x200001ac                . = ALIGN (0x4)
                 [!provide]                PROVIDE (__preinit_array_start, .)
  *(.preinit_array)
                 [!provide]                PROVIDE (__preinit_array_end, .)
-                0x200001a8                . = ALIGN (0x4)
+                0x200001ac                . = ALIGN (0x4)
                 [!provide]                PROVIDE (__init_array_start, .)
  *(SORT(.init_array.*))
  *(.init_array)
                 [!provide]                PROVIDE (__init_array_end, .)
-                0x200001a8                . = ALIGN (0x4)
+                0x200001ac                . = ALIGN (0x4)
                 [!provide]                PROVIDE (__fini_array_start, .)
  *(SORT(.fini_array.*))
  *(.fini_array)
                 [!provide]                PROVIDE (__fini_array_end, .)
  *(.jcr*)
-                0x200001a8                . = ALIGN (0x4)
-                0x200001a8                __data_end__ = .
-                0x200001a8                _edata = __data_end__
+                0x200001ac                . = ALIGN (0x4)
+                0x200001ac                __data_end__ = .
+                0x200001ac                _edata = __data_end__
 
-.igot.plt       0x200001a8        0x0 load address 0x0800365c
- .igot.plt      0x200001a8        0x0 ..\obj\stm32f4xx_gpio.o
+.igot.plt       0x200001ac        0x0 load address 0x080036d0
+ .igot.plt      0x200001ac        0x0 ..\obj\stm32f4xx_gpio.o
 
-.bss            0x200001a8     0x63c0 load address 0x0800365c
-                0x200001a8                . = ALIGN (0x4)
-                0x200001a8                __bss_start__ = .
-                0x200001a8                _sbss = __bss_start__
+.bss            0x200001ac     0x63c0 load address 0x080036d0
+                0x200001ac                . = ALIGN (0x4)
+                0x200001ac                __bss_start__ = .
+                0x200001ac                _sbss = __bss_start__
  *(.bss*)
- .bss           0x200001a8        0x8 ..\obj\sand.o
-                0x200001a8                sandCount0
-                0x200001ac                sandCount1
- .bss           0x200001b0      0x198 ..\obj\main.o
-                0x200001b0                angle
-                0x20000340                calcOrNot
-                0x20000344                anim_count
+ .bss           0x200001ac        0x8 ..\obj\sand.o
+                0x200001ac                sandCount0
+                0x200001b0                sandCount1
+ .bss           0x200001b4      0x198 ..\obj\main.o
+                0x200001b4                angle
+                0x20000344                calcOrNot
+                0x20000348                anim_count
  *(COMMON)
- COMMON         0x20000348     0x1a18 ..\obj\ws2812.o
-                0x20000348                WS2812_LED_BUF
-                0x200004cc                ws2812_dma_status
-                0x200004d0                WS2812_TIMER_BUF
- COMMON         0x20001d60     0x4804 ..\obj\init.o
-                0x20001d60                calcMatrix
-                0x20006560                debounceCount
- COMMON         0x20006564        0x3 ..\obj\main.o
-                0x20006564                sandCol
-                0x20006568                . = ALIGN (0x4)
- *fill*         0x20006567        0x1 
-                0x20006568                __bss_end__ = .
-                0x20006568                _ebss = __bss_end__
+ COMMON         0x2000034c     0x1a18 ..\obj\ws2812.o
+                0x2000034c                WS2812_LED_BUF
+                0x200004d0                ws2812_dma_status
+                0x200004d4                WS2812_TIMER_BUF
+ COMMON         0x20001d64     0x4804 ..\obj\init.o
+                0x20001d64                calcMatrix
+                0x20006564                debounceCount
+ COMMON         0x20006568        0x3 ..\obj\main.o
+                0x20006568                sandCol
+                0x2000656c                . = ALIGN (0x4)
+ *fill*         0x2000656b        0x1 
+                0x2000656c                __bss_end__ = .
+                0x2000656c                _ebss = __bss_end__
 
-.heap           0x20006568        0x0
-                0x20006568                __end__ = .
-                0x20006568                _end = __end__
-                0x20006568                end = __end__
+.heap           0x2000656c        0x0
+                0x2000656c                __end__ = .
+                0x2000656c                _end = __end__
+                0x2000656c                end = __end__
  *(.heap*)
-                0x20006568                __HeapLimit = .
+                0x2000656c                __HeapLimit = .
 
-.co_stack       0x20006568      0x800 load address 0x08009a1c
-                0x20006568                . = ALIGN (0x8)
+.co_stack       0x2000656c      0x804 load address 0x08009a90
+                0x20006570                . = ALIGN (0x8)
+ *fill*         0x2000656c        0x4 
  *(.co_stack .co_stack.*)
- .co_stack      0x20006568      0x800 ..\obj\startup_stm32f4xx.o
-                0x20006568                pulStack
+ .co_stack      0x20006570      0x800 ..\obj\startup_stm32f4xx.o
+                0x20006570                pulStack
                 0x20020000                __StackTop = (ORIGIN (ram) + LENGTH (ram))
-                0x2001f800                __StackLimit = (__StackTop - SIZEOF (.co_stack))
+                0x2001f7fc                __StackLimit = (__StackTop - SIZEOF (.co_stack))
                 [!provide]                PROVIDE (__stack, __StackTop)
                 0x00000001                ASSERT ((__StackLimit >= __HeapLimit), region ram  overflowed with stack)
 LOAD ..\obj\stm32f4xx_gpio.o
@@ -614,7 +615,7 @@ LOAD c:/program files/gnu tools arm embedded/5.3 2016q1/bin/../lib/gcc/arm-none-
 END GROUP
 OUTPUT(uhrDesSandes.elf elf32-littlearm)
 
-.debug_info     0x00000000     0x87e6
+.debug_info     0x00000000     0x86dd
  .debug_info    0x00000000      0x7db ..\obj\stm32f4xx_gpio.o
  .debug_info    0x000007db      0x104 ..\obj\startup_stm32f4xx.o
  .debug_info    0x000008df      0x6fe ..\obj\stm32f4xx_dma.o
@@ -623,13 +624,13 @@ OUTPUT(uhrDesSandes.elf elf32-littlearm)
  .debug_info    0x00002b79      0x349 ..\obj\stm32f4xx_exti.o
  .debug_info    0x00002ec2      0x5e6 ..\obj\system_stm32f4xx.o
  .debug_info    0x000034a8      0x55c ..\obj\misc.o
- .debug_info    0x00003a04      0xeae ..\obj\init.o
- .debug_info    0x000048b2     0x248c ..\obj\stm32f4xx_tim.o
- .debug_info    0x00006d3e      0xc9f ..\obj\sand.o
- .debug_info    0x000079dd      0x2b6 ..\obj\stm32f4xx_syscfg.o
- .debug_info    0x00007c93      0xb53 ..\obj\main.o
+ .debug_info    0x00003a04      0xd93 ..\obj\init.o
+ .debug_info    0x00004797     0x248c ..\obj\stm32f4xx_tim.o
+ .debug_info    0x00006c23      0xc9f ..\obj\sand.o
+ .debug_info    0x000078c2      0x2b6 ..\obj\stm32f4xx_syscfg.o
+ .debug_info    0x00007b78      0xb65 ..\obj\main.o
 
-.debug_abbrev   0x00000000     0x1895
+.debug_abbrev   0x00000000     0x18ae
  .debug_abbrev  0x00000000      0x1f3 ..\obj\stm32f4xx_gpio.o
  .debug_abbrev  0x000001f3       0xdf ..\obj\startup_stm32f4xx.o
  .debug_abbrev  0x000002d2      0x175 ..\obj\stm32f4xx_dma.o
@@ -642,9 +643,9 @@ OUTPUT(uhrDesSandes.elf elf32-littlearm)
  .debug_abbrev  0x00000f5f      0x27f ..\obj\stm32f4xx_tim.o
  .debug_abbrev  0x000011de      0x2d3 ..\obj\sand.o
  .debug_abbrev  0x000014b1      0x162 ..\obj\stm32f4xx_syscfg.o
- .debug_abbrev  0x00001613      0x282 ..\obj\main.o
+ .debug_abbrev  0x00001613      0x29b ..\obj\main.o
 
-.debug_loc      0x00000000     0x4da0
+.debug_loc      0x00000000     0x4e59
  .debug_loc     0x00000000      0x3a0 ..\obj\stm32f4xx_gpio.o
  .debug_loc     0x000003a0       0x2b ..\obj\startup_stm32f4xx.o
  .debug_loc     0x000003cb      0x424 ..\obj\stm32f4xx_dma.o
@@ -657,7 +658,7 @@ OUTPUT(uhrDesSandes.elf elf32-littlearm)
  .debug_loc     0x00001a05     0x2086 ..\obj\stm32f4xx_tim.o
  .debug_loc     0x00003a8b     0x1095 ..\obj\sand.o
  .debug_loc     0x00004b20       0xa6 ..\obj\stm32f4xx_syscfg.o
- .debug_loc     0x00004bc6      0x1da ..\obj\main.o
+ .debug_loc     0x00004bc6      0x293 ..\obj\main.o
 
 .debug_aranges  0x00000000      0x1a8
  .debug_aranges
@@ -687,7 +688,7 @@ OUTPUT(uhrDesSandes.elf elf32-littlearm)
  .debug_aranges
                 0x00000180       0x28 ..\obj\main.o
 
-.debug_line     0x00000000     0x2aa4
+.debug_line     0x00000000     0x2b0b
  .debug_line    0x00000000      0x319 ..\obj\stm32f4xx_gpio.o
  .debug_line    0x00000319       0x90 ..\obj\startup_stm32f4xx.o
  .debug_line    0x000003a9      0x370 ..\obj\stm32f4xx_dma.o
@@ -696,13 +697,13 @@ OUTPUT(uhrDesSandes.elf elf32-littlearm)
  .debug_line    0x00000e3a      0x276 ..\obj\stm32f4xx_exti.o
  .debug_line    0x000010b0      0x1f3 ..\obj\system_stm32f4xx.o
  .debug_line    0x000012a3      0x24d ..\obj\misc.o
- .debug_line    0x000014f0      0x3ee ..\obj\init.o
- .debug_line    0x000018de      0x7db ..\obj\stm32f4xx_tim.o
- .debug_line    0x000020b9      0x45e ..\obj\sand.o
- .debug_line    0x00002517      0x249 ..\obj\stm32f4xx_syscfg.o
- .debug_line    0x00002760      0x344 ..\obj\main.o
+ .debug_line    0x000014f0      0x3d3 ..\obj\init.o
+ .debug_line    0x000018c3      0x7db ..\obj\stm32f4xx_tim.o
+ .debug_line    0x0000209e      0x45e ..\obj\sand.o
+ .debug_line    0x000024fc      0x249 ..\obj\stm32f4xx_syscfg.o
+ .debug_line    0x00002745      0x3c6 ..\obj\main.o
 
-.debug_str      0x00000000     0x2c7b
+.debug_str      0x00000000     0x2bbd
  .debug_str     0x00000000      0x473 ..\obj\stm32f4xx_gpio.o
                                 0x4cf (size before relaxing)
  .debug_str     0x00000473       0xba ..\obj\startup_stm32f4xx.o
@@ -719,16 +720,16 @@ OUTPUT(uhrDesSandes.elf elf32-littlearm)
                                 0x3bf (size before relaxing)
  .debug_str     0x00001b1f      0x155 ..\obj\misc.o
                                 0x3e3 (size before relaxing)
- .debug_str     0x00001c74      0x18a ..\obj\init.o
-                                0xdac (size before relaxing)
- .debug_str     0x00001dfe      0x97d ..\obj\stm32f4xx_tim.o
+ .debug_str     0x00001c74       0xf0 ..\obj\init.o
+                                0xd0f (size before relaxing)
+ .debug_str     0x00001d64      0x97d ..\obj\stm32f4xx_tim.o
                                 0xdf8 (size before relaxing)
- .debug_str     0x0000277b      0x29f ..\obj\sand.o
+ .debug_str     0x000026e1      0x29f ..\obj\sand.o
                                 0x42b (size before relaxing)
- .debug_str     0x00002a1a      0x152 ..\obj\stm32f4xx_syscfg.o
+ .debug_str     0x00002980      0x152 ..\obj\stm32f4xx_syscfg.o
                                 0x320 (size before relaxing)
- .debug_str     0x00002b6c      0x10f ..\obj\main.o
-                                0x4df (size before relaxing)
+ .debug_str     0x00002ad2       0xeb ..\obj\main.o
+                                0x4c7 (size before relaxing)
 
 .comment        0x00000000       0x6e
  .comment       0x00000000       0x6e ..\obj\stm32f4xx_gpio.o
@@ -779,7 +780,7 @@ OUTPUT(uhrDesSandes.elf elf32-littlearm)
  .ARM.attributes
                 0x00000307       0x22 c:/program files/gnu tools arm embedded/5.3 2016q1/bin/../lib/gcc/arm-none-eabi/5.3.1/armv7e-m/fpu\libgcc.a(_arm_truncdfsf2.o)
 
-.debug_frame    0x00000000     0x13b4
+.debug_frame    0x00000000     0x13ac
  .debug_frame   0x00000000      0x164 ..\obj\stm32f4xx_gpio.o
  .debug_frame   0x00000164       0x30 ..\obj\startup_stm32f4xx.o
  .debug_frame   0x00000194      0x1a8 ..\obj\stm32f4xx_dma.o
@@ -788,11 +789,11 @@ OUTPUT(uhrDesSandes.elf elf32-littlearm)
  .debug_frame   0x00000770       0xb4 ..\obj\stm32f4xx_exti.o
  .debug_frame   0x00000824       0x3c ..\obj\system_stm32f4xx.o
  .debug_frame   0x00000860       0x74 ..\obj\misc.o
- .debug_frame   0x000008d4       0xe4 ..\obj\init.o
- .debug_frame   0x000009b8      0x6f8 ..\obj\stm32f4xx_tim.o
- .debug_frame   0x000010b0      0x1a8 ..\obj\sand.o
- .debug_frame   0x00001258       0x88 ..\obj\stm32f4xx_syscfg.o
- .debug_frame   0x000012e0       0xd4 ..\obj\main.o
+ .debug_frame   0x000008d4       0xc8 ..\obj\init.o
+ .debug_frame   0x0000099c      0x6f8 ..\obj\stm32f4xx_tim.o
+ .debug_frame   0x00001094      0x1a8 ..\obj\sand.o
+ .debug_frame   0x0000123c       0x88 ..\obj\stm32f4xx_syscfg.o
+ .debug_frame   0x000012c4       0xe8 ..\obj\main.o
 
 .debug_ranges   0x00000000      0x348
  .debug_ranges  0x00000000       0x20 ..\obj\stm32f4xx_rcc.o

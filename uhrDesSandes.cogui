@@ -17,13 +17,12 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="2"/>
 <part id="3"/>
-<part id="8"/>
+<part id="7"/>
 <part id="4"/>
 <part id="0"/>
 <part id="1"/>
 <part id="5"/>
 <part id="6"/>
-<part id="7"/>
 </presentation>
 </folder>
 </info>
@@ -36,9 +35,9 @@
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/uhrDesSandes/sand.h"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="175" selectionTopPixel="0"/>
 </editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" partName="main.c" path="C:/Users/Janis/Documents/GitHub/uhrDesSandes/main.c" title="main.c" tooltip="C:/Users/Janis/Documents/GitHub/uhrDesSandes/main.c" workbook="DefaultEditorWorkbook">
+<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" partName="main.c" path="C:/Users/Janis/Documents/GitHub/uhrDesSandes/main.c" title="main.c" tooltip="C:/Users/Janis/Documents/GitHub/uhrDesSandes/main.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/uhrDesSandes/main.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1016" selectionTopPixel="375"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2025" selectionTopPixel="1530"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="globalVars.h" partName="globalVars.h" path="C:/Users/Janis/Documents/GitHub/uhrDesSandes/globalVars.h" title="globalVars.h" tooltip="C:/Users/Janis/Documents/GitHub/uhrDesSandes/globalVars.h" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/uhrDesSandes/globalVars.h"/>
@@ -46,7 +45,7 @@
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="init.h" partName="init.h" path="C:/Users/Janis/Documents/GitHub/uhrDesSandes/init.h" title="init.h" tooltip="C:/Users/Janis/Documents/GitHub/uhrDesSandes/init.h" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/uhrDesSandes/init.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="209" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="284" selectionTopPixel="0"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="ws2812.c" partName="ws2812.c" path="C:/Users/Janis/Documents/GitHub/uhrDesSandes/ws2812.c" title="ws2812.c" tooltip="C:/Users/Janis/Documents/GitHub/uhrDesSandes/ws2812.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/uhrDesSandes/ws2812.c"/>
@@ -56,13 +55,9 @@
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/uhrDesSandes/ws2812.h"/>
 <editorState selectionHorizontalPixel="0" selectionLength="30" selectionOffset="440" selectionTopPixel="148"/>
 </editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_conf.h" partName="stm32f4xx_conf.h" path="C:/Users/Janis/Documents/GitHub/uhrDesSandes/cmsis_boot/stm32f4xx_conf.h" title="stm32f4xx_conf.h" tooltip="C:/Users/Janis/Documents/GitHub/uhrDesSandes/cmsis_boot/stm32f4xx_conf.h" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/uhrDesSandes/cmsis_boot/stm32f4xx_conf.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="87" selectionTopPixel="90"/>
-</editor>
-<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="init.c" partName="init.c" path="C:/Users/Janis/Documents/GitHub/uhrDesSandes/init.c" title="init.c" tooltip="C:/Users/Janis/Documents/GitHub/uhrDesSandes/init.c" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="init.c" partName="init.c" path="C:/Users/Janis/Documents/GitHub/uhrDesSandes/init.c" title="init.c" tooltip="C:/Users/Janis/Documents/GitHub/uhrDesSandes/init.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/uhrDesSandes/init.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="5060" selectionTopPixel="1890"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2794" selectionTopPixel="945"/>
 </editor>
 </editors>
 <views>
@@ -75,7 +70,7 @@
 <element path="/uhrDesSandes/cmsis_lib/source"/>
 </expanded>
 <selection>
-<element path="/uhrDesSandes/globalVars.h"/>
+<element path="/uhrDesSandes/cmsis_lib/source/stm32f4xx_syscfg.c"/>
 </selection>
 </viewState>
 </view>
@@ -134,23 +129,16 @@
 <page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@503f4e" ratio="0.6679842" ratioLeft="507" ratioRight="252" relationship="4" relative="org.eclipse.ui.internal.ViewStack@275b35">
-<folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
-<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
-</presentation>
-</folder>
-</info>
 <info folder="true" part="org.eclipse.ui.internal.ViewStack@108bbd5" ratio="0.22" ratioLeft="220" ratioRight="780" relationship="2" relative="org.eclipse.ui.internal.ViewStack@275b35">
 <folder appearance="2" expanded="2">
 <page content="org.coocox.builder.ui.exampleView" label="LabelNotFound"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@90be01" ratio="0.7192308" ratioLeft="561" ratioRight="219" relationship="2" relative="org.eclipse.ui.internal.ViewStack@108bbd5">
-<folder activePageID="org.eclipse.search.ui.views.SearchView" appearance="2" expanded="2">
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@90be01" ratio="0.66178626" ratioLeft="904" ratioRight="462" relationship="2" relative="org.eclipse.ui.internal.ViewStack@108bbd5">
+<folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.search.ui.views.SearchView" label="Search"/>
+<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <page content="org.coocox.component.ui.Help" label="LabelNotFound"/>
 <page content="org.eclipse.debug.ui.BreakpointView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.ContentOutline" label="LabelNotFound"/>
@@ -158,6 +146,7 @@
 <page content="org.coocox.builder.ui.MoreExampleView" label="LabelNotFound"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
+<part id="1"/>
 </presentation>
 </folder>
 </info>
@@ -178,147 +167,22 @@
 <navigationHistory>
 <editors>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/uhrDesSandes/main.c"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/uhrDesSandes/sand.c"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/uhrDesSandes/cmsis_lib/include/stm32f4xx_exti.h"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/uhrDesSandes/sand.c"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/uhrDesSandes/init.c"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/uhrDesSandes/init.h"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/uhrDesSandes/sand.h"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/uhrDesSandes/cmsis_lib/include/stm32f4xx_gpio.h"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/uhrDesSandes/globalVars.h"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/uhrDesSandes/cmsis_boot/stm32f4xx_conf.h"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/uhrDesSandes/init.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/uhrDesSandes/main.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/uhrDesSandes/globalVars.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/uhrDesSandes/cmsis_lib/include/stm32f4xx_syscfg.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/uhrDesSandes/cmsis_lib/source/stm32f4xx_syscfg.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/uhrDesSandes/cmsis_boot/stm32f4xx_conf.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/uhrDesSandes/init.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/uhrDesSandes/init.h"/>
 </editors>
-<item historyLabel="sand.c" index="1">
-<position info="not_deleted" x="10069" y="11"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="1997" y="8"/>
-</item>
-<item historyLabel="stm32f4xx_exti.h" index="2">
-<position info="not_deleted" x="1878" y="20"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="740" y="0"/>
-</item>
-<item historyLabel="sand.c" index="3">
-<position info="not_deleted" x="10089" y="11"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="740" y="0"/>
-</item>
-<item historyLabel="sand.c" index="3">
-<position info="not_deleted" x="10089" y="11"/>
-</item>
-<item historyLabel="sand.c" index="3">
-<position info="not_deleted" x="1562" y="0"/>
-</item>
-<item historyLabel="sand.c" index="3">
-<position/>
-</item>
-<item historyLabel="main.c" index="0">
-<position/>
-</item>
-<item historyLabel="sand.c" index="3">
-<position info="not_deleted" x="5667" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position/>
-</item>
-<item historyLabel="init.c" index="4">
-<position info="not_deleted" x="1611" y="0"/>
-</item>
-<item historyLabel="sand.c" index="3">
-<position info="not_deleted" x="5670" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="2658" y="0"/>
-</item>
-<item historyLabel="init.c" index="4">
-<position info="not_deleted" x="6124" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="2658" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="414" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="2351" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="2436" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="2549" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="2329" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="2321" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="2674" y="0"/>
-</item>
-<item historyLabel="init.h" index="5">
-<position info="not_deleted" x="196" y="0"/>
-</item>
-<item historyLabel="sand.c" index="3">
-<position info="not_deleted" x="5670" y="0"/>
-</item>
-<item historyLabel="sand.h" index="6">
-<position info="not_deleted" x="255" y="0"/>
-</item>
-<item historyLabel="sand.h" index="6">
-<position info="not_deleted" x="175" y="0"/>
-</item>
-<item historyLabel="sand.c" index="3">
-<position info="not_deleted" x="5764" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="2928" y="0"/>
-</item>
-<item historyLabel="init.c" index="4">
-<position info="not_deleted" x="4813" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="2928" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="1218" y="0"/>
-</item>
-<item historyLabel="stm32f4xx_gpio.h" index="7">
-<position info="not_deleted" x="16353" y="73"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="1218" y="0"/>
-</item>
-<item historyLabel="init.c" index="4">
-<position info="not_deleted" x="4320" y="46"/>
-</item>
-<item historyLabel="init.c" index="4">
-<position info="not_deleted" x="155" y="16"/>
-</item>
-<item historyLabel="init.c" index="4">
-<position info="not_deleted" x="4190" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="1218" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="981" y="0"/>
-</item>
-<item historyLabel="globalVars.h" index="8">
-<position info="not_deleted" x="323" y="13"/>
-</item>
-<item historyLabel="globalVars.h" index="8">
-<position info="not_deleted" x="0" y="0"/>
-</item>
 <item historyLabel="main.c" index="0">
 <position info="not_deleted" x="273" y="0"/>
 </item>
-<item historyLabel="stm32f4xx_conf.h" index="9">
+<item historyLabel="stm32f4xx_conf.h" index="3">
 <position info="not_deleted" x="87" y="0"/>
 </item>
 <item historyLabel="main.c" index="0">
@@ -327,17 +191,143 @@
 <item historyLabel="main.c" index="0">
 <position info="not_deleted" x="1919" y="0"/>
 </item>
-<item historyLabel="init.c" index="4">
+<item historyLabel="init.c" index="1">
 <position info="not_deleted" x="5112" y="0"/>
 </item>
 <item historyLabel="main.c" index="0">
 <position info="not_deleted" x="1016" y="0"/>
 </item>
-<item historyLabel="init.h" index="5">
+<item historyLabel="init.h" index="2">
 <position info="not_deleted" x="209" y="0"/>
 </item>
-<item active="true" historyLabel="init.c" index="10">
+<item historyLabel="init.c" index="4">
 <position info="not_deleted" x="28" y="9"/>
+</item>
+<item historyLabel="main.c" index="5">
+<position/>
+</item>
+<item historyLabel="init.c" index="4">
+<position info="not_deleted" x="4699" y="0"/>
+</item>
+<item historyLabel="main.c" index="5">
+<position/>
+</item>
+<item historyLabel="init.c" index="4">
+<position info="not_deleted" x="4536" y="0"/>
+</item>
+<item historyLabel="main.c" index="5">
+<position/>
+</item>
+<item historyLabel="init.c" index="4">
+<position info="not_deleted" x="4536" y="0"/>
+</item>
+<item historyLabel="globalVars.h" index="6">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="init.c" index="4">
+<position info="not_deleted" x="5621" y="0"/>
+</item>
+<item historyLabel="main.c" index="5">
+<position/>
+</item>
+<item historyLabel="init.c" index="4">
+<position info="not_deleted" x="4614" y="0"/>
+</item>
+<item historyLabel="main.c" index="5">
+<position/>
+</item>
+<item historyLabel="init.c" index="4">
+<position info="not_deleted" x="4614" y="0"/>
+</item>
+<item historyLabel="main.c" index="5">
+<position/>
+</item>
+<item historyLabel="main.c" index="5">
+<position/>
+</item>
+<item historyLabel="main.c" index="5">
+<position/>
+</item>
+<item historyLabel="init.c" index="4">
+<position info="not_deleted" x="4403" y="0"/>
+</item>
+<item historyLabel="main.c" index="5">
+<position/>
+</item>
+<item historyLabel="init.c" index="4">
+<position info="not_deleted" x="5587" y="0"/>
+</item>
+<item historyLabel="main.c" index="5">
+<position/>
+</item>
+<item historyLabel="init.c" index="4">
+<position info="not_deleted" x="4487" y="0"/>
+</item>
+<item historyLabel="main.c" index="5">
+<position/>
+</item>
+<item historyLabel="init.c" index="4">
+<position info="not_deleted" x="4487" y="0"/>
+</item>
+<item historyLabel="globalVars.h" index="6">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="main.c" index="5">
+<position/>
+</item>
+<item historyLabel="init.c" index="4">
+<position info="not_deleted" x="4283" y="0"/>
+</item>
+<item historyLabel="main.c" index="5">
+<position/>
+</item>
+<item historyLabel="init.c" index="4">
+<position info="not_deleted" x="4283" y="0"/>
+</item>
+<item historyLabel="main.c" index="5">
+<position/>
+</item>
+<item historyLabel="init.c" index="4">
+<position info="not_deleted" x="5987" y="0"/>
+</item>
+<item historyLabel="main.c" index="5">
+<position info="not_deleted" x="951" y="0"/>
+</item>
+<item historyLabel="stm32f4xx_syscfg.h" index="7">
+<position info="not_deleted" x="87" y="0"/>
+</item>
+<item historyLabel="stm32f4xx_syscfg.c" index="8">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="stm32f4xx_conf.h" index="9">
+<position info="not_deleted" x="2098" y="0"/>
+</item>
+<item historyLabel="stm32f4xx_syscfg.c" index="8">
+<position info="not_deleted" x="87" y="0"/>
+</item>
+<item historyLabel="stm32f4xx_syscfg.h" index="7">
+<position info="not_deleted" x="87" y="0"/>
+</item>
+<item historyLabel="main.c" index="5">
+<position info="not_deleted" x="1347" y="0"/>
+</item>
+<item historyLabel="main.c" index="5">
+<position info="not_deleted" x="1084" y="0"/>
+</item>
+<item historyLabel="main.c" index="5">
+<position info="not_deleted" x="1347" y="0"/>
+</item>
+<item historyLabel="main.c" index="5">
+<position info="not_deleted" x="2886" y="0"/>
+</item>
+<item historyLabel="init.c" index="10">
+<position/>
+</item>
+<item historyLabel="init.h" index="11">
+<position info="not_deleted" x="284" y="0"/>
+</item>
+<item active="true" historyLabel="main.c" index="5">
+<position info="not_deleted" x="2914" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -346,6 +336,21 @@
 <actionBarAdvisor/>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_syscfg.c" tooltip="uhrDesSandes/cmsis_lib/source/stm32f4xx_syscfg.c">
+<persistable path="/uhrDesSandes/cmsis_lib/source/stm32f4xx_syscfg.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_syscfg.h" tooltip="uhrDesSandes/cmsis_lib/include/stm32f4xx_syscfg.h">
+<persistable path="/uhrDesSandes/cmsis_lib/include/stm32f4xx_syscfg.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_gpio.c" tooltip="uhrDesSandes/cmsis_lib/source/stm32f4xx_gpio.c">
+<persistable path="/uhrDesSandes/cmsis_lib/source/stm32f4xx_gpio.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_spi.h" tooltip="uhrDesSandes/cmsis_lib/include/stm32f4xx_spi.h">
+<persistable path="/uhrDesSandes/cmsis_lib/include/stm32f4xx_spi.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_spi.c" tooltip="uhrDesSandes/cmsis_lib/source/stm32f4xx_spi.c">
+<persistable path="/uhrDesSandes/cmsis_lib/source/stm32f4xx_spi.c"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="init.c" tooltip="uhrDesSandes/init.c">
 <persistable path="/uhrDesSandes/init.c"/>
 </file>
@@ -367,29 +372,14 @@
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_exti.h" tooltip="uhrDesSandes/cmsis_lib/include/stm32f4xx_exti.h">
 <persistable path="/uhrDesSandes/cmsis_lib/include/stm32f4xx_exti.h"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_syscfg.h" tooltip="uhrDesSandes/cmsis_lib/include/stm32f4xx_syscfg.h">
-<persistable path="/uhrDesSandes/cmsis_lib/include/stm32f4xx_syscfg.h"/>
-</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx.h" tooltip="uhrDesSandes/cmsis_boot/stm32f4xx.h">
 <persistable path="/uhrDesSandes/cmsis_boot/stm32f4xx.h"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_spi.h" tooltip="uhrDesSandes/cmsis_lib/include/stm32f4xx_spi.h">
-<persistable path="/uhrDesSandes/cmsis_lib/include/stm32f4xx_spi.h"/>
 </file>
 <file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="uhrDesSandes.coproj" tooltip="C:\Users\Janis\Documents\GitHub\uhrDesSandes\uhrDesSandes.coproj">
 <persistable uri="file:/C:/Users/Janis/Documents/GitHub/uhrDesSandes/uhrDesSandes.coproj"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="ws2812.h" tooltip="uhrDesSandes/ws2812.h">
-<persistable path="/uhrDesSandes/ws2812.h"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="ws2812.c" tooltip="uhrDesSandes/ws2812.c">
-<persistable path="/uhrDesSandes/ws2812.c"/>
-</file>
-<file factoryID="org.eclipse.cdt.ui.ExternalEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stdint.h" tooltip="C:\Program Files\CoIDE\gcc-arm-none-eabi-4.8\arm-none-eabi\include\stdint.h">
-<persistable path="C:\Program Files\CoIDE\gcc-arm-none-eabi-4.8\arm-none-eabi\include\stdint.h" project="uhrDesSandes"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="init.h" tooltip="uhrDesSandes/init.h">
-<persistable path="/uhrDesSandes/init.h"/>
+<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="uhrDesSandes.coproj" tooltip="C:\Users\Janis\Documents\GitHub\uhrDesSandes\uhrDesSandes.coproj">
+<persistable uri="file:/C:/Users/Janis/Documents/GitHub/uhrDesSandes/uhrDesSandes.coproj"/>
 </file>
 </mruList>
 </workbench>
