@@ -144,7 +144,6 @@ int main(void)
 	sendSettings(13, 0);  // displaytest off
 
 
-
     while(1)
     {
     	//int xx = 10000;
